@@ -15,21 +15,7 @@ require_once '../../system/config.php';
 $loggedInUserId = $_SESSION['user_id'];
 
 // Get the logged-in user's data
-$stmt = $pdo->prepare("
-    SELECT 
-        up.user_id,
-        up.firstname,
-        up.lastname,
-        up.birthdate,
-        up.street,
-        up.postcode,
-        up.city,
-        up.phone,
-        u.email
-    FROM user_profiles up
-    JOIN users u ON up.user_id = u.id
-    WHERE up.user_id = :user_id
-");
+$stmt = $pdo->prepare("SELECT user_id, firstname, lastname, birthdate, steet, postcode, city, phone FROM user_profiles WHERE user_id = :user_id");
 $stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
 $stmt->execute();
 

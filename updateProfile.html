@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Protected Page</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Benutzerkonto</h1>
+
+    <section id="userProfile">
+      <h2>Anmeldedaten</h2>
+      <input type="text" id="inputFirstName" placeholder="Vorname" />
+      <input type="text" id="inputLastName" placeholder="Nachname" />
+      <input type="text" id="inputEmail" placeholder="E-Mail" />
+
+      <button id="buttonUpdateUserProfile">Änderungen Anmeldedaten speichern</button>
+    </section>
+
+    <section id="userData">
+      <h2>Personalien</h2>
+      <input type="date" id="inputBirthdate" placeholder="Geburtsdatum" />
+      <input type="text" id="inputPhone" placeholder="Telefon" />
+      <input type="text" id="inputStreet" placeholder="Strasse" />
+      <input type="text" id="inputPostcode" placeholder="PLZ" />
+      <input type="text" id="inputCity" placeholder="Ort" />
+      
+      <button id="buttonUpdateUserData">Änderungen Personalien speichern</button>
+    </section>
+
+    <button id="logoutBtn">Logout</button>
+
+    <script type="module" src="js/profile.js"></script>
+    <script src="js/logout.js"></script>
+  </body>
+  
+</html>
