@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Medizinische Behandlungs (5/7)</h1>
+    <h2>Therapieziel – ich möchte lebensverlängernde Massnahmen nur bei Erhaltung der Lebensqualität und
+        wünsche folgende Behandlungen:</h2>
+
+    <div id="form-container">
+    <div class="question" data-id="1a">
+      <p>a. Behandlung auf der Intensivstation</p>
+      <button onclick="answerQuestion('1a', true)">Ja</button>
+      <button onclick="answerQuestion('1a', false)">Nein</button>
+    </div>
+
+    <div class="question" data-id="1b" data-depends="1a">
+      <p>b. Künstliche Beatmung über einen Schlauch (in der Regel über den Mund in die Luftröhre, medizinisch: Tubus, Intubation)</p>
+      <button onclick="answerQuestion('1b', true)">Ja</button>
+      <button onclick="answerQuestion('1b', false)">Nein</button>
+    </div>
+
+    <div class="question" data-id="1c">
+      <p>c. Herz-Lungen-Wiederbelebung (Reanimation)</p>
+      <button onclick="answerQuestion('1c', true)">Ja</button>
+      <button onclick="answerQuestion('1c', false)">Nein</button>
+    </div>
+
+     <div class="question" data-id="1d">
+      <p>d. Künstliche Ernährung / Flüssigkeit über Magensonde oder Vene</p>
+      <button onclick="answerQuestion('1d', true)">Ja</button>
+      <button onclick="answerQuestion('1d', false)">Nein</button>
+    </div>
+
+  </div>
+  <script src="js/grayedpage.js"></script>
+  </body>
+</html>
+
