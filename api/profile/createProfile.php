@@ -9,12 +9,13 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // DB-Verbindung
-require_once '../system/config.php';
+require_once '../../system/config.php';
 
 // Logged-in user ID
 $loggedInUserId = $_SESSION['user_id'];
 
 // Get the logged-in user's data
+// Fetch the logged-in user's data
 $stmt = $pdo->prepare("
     SELECT 
         up.user_id,
@@ -33,18 +34,19 @@ $stmt = $pdo->prepare("
 $stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
 $stmt->execute();
 
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+// Insert a new user profile
+$insertStmt = $pdo->prepare("
+    INSERT INTO user_profiles (user_id, firstname, lastname)
+    VALUES (:user_id, :firstname, :lastname)
+");
+$insertStmt->bindParam(':user_id', $newUserId, PDO::PARAM_INT);
+$insertStmt->bindParam(':firstname', $newFirstname, PDO::PARAM_STR);
+$insertStmt->bindParam(':lastname', $newLastname, PDO::PARAM_STR);
 
-if ($user) {
-    header('Content-Type: application/json');
-    echo json_encode([
-        "status" => "success",
-        "user" => $user
-    ]);
-} 
-else {
-    http_response_code(404);
-    header('Content-Type: application/json');
-    echo json_encode(["error" => "User not found"]);
-}
+// Example values for the new user profile
+$newUserId = 1;
+$newFirstname = 'Benjamin';
+$newLastname = 'Hanimann';
+
+$insertStmt->execute();
 ?>
