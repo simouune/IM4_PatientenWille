@@ -1,16 +1,14 @@
 <?php
-// register.php
 session_start();
 header('Content-Type: application/json');
-
 require_once '../system/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email    = trim($_POST['email'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
     if (!$email || !$password) {
-        echo json_encode(["status" => "error", "message" => "Email and password are required"]);
+        echo json_encode(["status" => "error", "message" => "Email und Passwort sind erforderlich"]);
         exit;
     }
 
@@ -18,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
     $stmt->execute([':email' => $email]);
     if ($stmt->fetch()) {
-        echo json_encode(["status" => "error", "message" => "Email is already in use"]);
+        echo json_encode(["status" => "error", "message" => "Email ist bereits vergeben"]);
         exit;
     }
 
@@ -26,17 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the new user
-    $insert = $pdo->prepare("INSERT INTO users (email, password, birthdate, adress_street, adress_plz, adress_town) VALUES (:email, :pass, :birthdate, :adress_street, :adress_plz, :adress_town)");
+    $insert = $pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
     $insert->execute([
         ':email' => $email,
-        ':pass'  => $hashedPassword,
-        ':birthdate' => date('d-m-Y H:i:s'),
-        ':adress_street' => $adress_street,
-        ':adress_plz' => $adress_plz,
-        ':adress_town' => $adress_town,
+        ':password' => $hashedPassword,
     ]);
 
     echo json_encode(["status" => "success"]);
 } else {
-    echo json_encode(["status" => "error", "message" => "Invalid request method"]);
+    echo json_encode(["status" => "error", "message" => "Ungültige Anfrage"]);
 }
