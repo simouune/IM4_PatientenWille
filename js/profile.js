@@ -1,274 +1,159 @@
-/**
- * Profilverwaltung JavaScript
- * 
- * Dieses Skript verwaltet die Benutzerprofile mit CRUD-Operationen (Create, Read, Update, Delete).
- * Es ermöglicht das Anzeigen, Erstellen, Aktualisieren und Löschen von Benutzerinformationen.
- * 
- * Ablauf:
- * 1. Authentifizierungsprüfung: Ist der Benutzer eingeloggt?
- * 2. Laden der Profildaten: Existiert bereits ein Profil?
- * 3. Event-Handler für CRUD-Operationen einrichten
- */
-
 // _______________________________________________________________
-// Authentifizierungsprüfung - Stellt sicher, dass der Benutzer eingeloggt ist
+// Daten zur Datenbank hinzufügen - CREATE Operation
 // _______________________________________________________________
 
+// DOM-Elemente für die Eingabefelder und den Speichern-Button auswählen
+const inputFirstName = document.querySelector('#inputFirstName');
+const inputLastName = document.querySelector('#inputLastName');
+const inputBirthdate = document.querySelector('#inputBirthdate');
+const inputStreet = document.querySelector('#inputStreet');
+const inputPostcode = document.querySelector('#inputPostcode');
+const inputCity = document.querySelector('#inputCity');
+const inputPhone = document.querySelector('#inputPhone');
+const saveButton = document.querySelector('#btnSave');
+
+// Speichert die eingegebenen Daten in der Datenbank
+saveButton.addEventListener('click', async () => {
+    // Benutzereingaben auslesen
+    let firstname = inputFirstName.value;
+    let lastname = inputLastName.value;
+    let birthdate = inputBirthdate.value;
+    let street = inputStreet.value;
+    let postcode = inputPostcode.value;
+    let city = inputCity.value;
+    let phone = inputPhone.value;
+    
+    // API-Endpoint für das Erstellen von Profildaten
+    const url = '/api/profile/createProfile.php';
+    
+    // Daten-Objekt für die API-Anfrage erstellen
+    const data = {
+        firstname: firstname,
+        lastname: lastname,
+        birthdate: birthdate,
+        street: street,
+        postcode: postcode,
+        city: city,
+        phone: phone
+    };
+
+    console.log("Daten, die gesendet werden:", data);
+    
+    // Daten zur API senden und Ergebnis abwarten
+    const dataAdded = await addData(url, data);
+    console.log(dataAdded);
+
+    
+    // Wenn erfolgreich gespeichert: Seite neu laden, um aktualisierte Daten anzuzeigen
+    /*if (dataAdded && !dataAdded.error) {
+        window.location.reload();
+    }*/
+});
+
 /**
- * Prüft, ob der Benutzer authentifiziert ist
+ * Sendet Daten per POST-Anfrage an die API
  * 
- * @returns {Object|boolean} Benutzerdaten bei erfolgreicher Authentifizierung, sonst false
+ * @param {string} url - API-Endpoint
+ * @param {Object} data - Zu sendende Daten
+ * @returns {Object} API-Antwort oder Fehlerinformationen
  */
-async function checkAuth() {
+
+async function addData(url, data) {
     try {
-      // API-Anfrage mit Credentials senden (überträgt Cookies zur Authentifizierung)
-      const response = await fetch("/api/protected.php", {
-        credentials: "include",
-      });
-  
-      // Wenn nicht authentifiziert (401), zur Login-Seite weiterleiten
-      if (response.status === 401) {
-        window.location.href = "/login.html";
-        return false;
-      }
-  
-      // Erfolgreiche Authentifizierung: Benutzerdaten zurückgeben
-      const result = await response.json();
-      return result;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        return await response.json(); //enthält evtl. Error-Meldung
     } catch (error) {
-      // Bei Fehlern in der API-Anfrage: Fehler loggen und zur Login-Seite weiterleiten
-      console.error("Auth check failed:", error);
-      window.location.href = "/login.html";
-      return false;
+        console.error(error);
+
+        // Fehlermeldung im HTML anzeigen
+        const fehlermeldungElement = document.querySelector('#fehlermeldung');
+        if (fehlermeldungElement) {
+            fehlermeldungElement.textContent = 'Fehler beim Senden der Daten an den Server.';        }
+
+        return { error: 'Fehler beim Senden der Daten an den Server.' };
     }
-  }
-  
-  /**
-   * Selbstausführende asynchrone Funktion (IIFE)
-   * Führt den Code nur aus, wenn die Authentifizierung erfolgreich war
-   */
-  (async function() {
-    // Authentifizierung prüfen und abbrechen, wenn nicht erfolgreich
-    const authResult = await checkAuth();
-    if (!authResult) return; // Code-Ausführung stoppen, wenn nicht authentifiziert
-  
-    // _______________________________________________________________
-    // Laden der Profildaten aus der API - READ Operation
-    // _______________________________________________________________
-  
-    /**
-     * Lädt Benutzerprofildaten von der API
-     * 
-     * @returns {Object} API-Antwort mit Benutzerdaten oder Fehlerinformationen
-     */
-    async function loadData() {
-        const url = '/api/profile/readProfile.php'; // Endpoint für das Lesen von Profildaten
-        try {
-            // Fetch-API zum Laden der Daten verwenden
-            const response = await fetch(url);
-            
-            // HTTP-Fehler abfangen (nicht 200-299)
-            if (!response.ok) {
-                return { error: `HTTP error! status: ${response.status}` };
-            }
-            
-            // Erfolgreiche Antwort als JSON zurückgeben
-            return await response.json();
-        } catch (error) {
-            // Netzwerk- oder JSON-Parsing-Fehler abfangen
-            console.error(error);
-            return { error: 'Failed to fetch data' };
-        }
+}
+
+saveButton.addEventListener('click', async () => {
+    // Benutzereingaben auslesen
+    let firstname = inputFirstName.value;
+    let lastname = inputLastName.value;
+    let birthdate = inputBirthdate.value;
+    let street = inputStreet.value;
+    let postcode = inputPostcode.value;
+    let city = inputCity.value;
+    let phone = inputPhone.value;
+
+    const fehlermeldungElement = document.querySelector('#fehlermeldung');
+    fehlermeldungElement.textContent = ''; // vorherige Fehlermeldung zurücksetzen
+
+    const url = '/api/profile/createProfile.php';
+    const data = {
+        firstname,
+        lastname,
+        birthdate,
+        street,
+        postcode,
+        city,
+        phone
+    };
+
+    const dataAdded = await addData(url, data);
+
+    // Wenn die API einen Fehler zurückmeldet, anzeigen
+    if (dataAdded.error) {
+        fehlermeldungElement.textContent = dataAdded.error;
+        fehlermeldungElement.style.color = 'red';
+        return;
     }
-  
-    // Daten laden und Fehlerbehandlung
-    let data;
+
+    // Wenn erfolgreich: Seite neu laden
+    window.location.reload();
+});
+
+
+// ______________________________________________________________
+// Daten der Datenbank anzeigen - READ Operation
+// ______________________________________________________________
+
+// Profildaten auslesen und in die Felder einfügen
+async function loadProfile() {
     try {
-        data = await loadData();
-        console.log(data); // Daten zur Überprüfung in der Konsole ausgeben
-    } catch (e) {
-        // Unerwartete Fehler beim Laden abfangen
-        console.error("Error loading data:", e);
-        data = { error: e.message };
-    }
-  
-    // DOM-Elemente für die Datenanzeige auswählen
-    const domfirstName = document.querySelector('#firstName');
-    const domlastName = document.querySelector('#lastName');
-    const inputBirthYear = document.querySelector('#inputBirthday');
-  
-    /**
-     * Daten im Benutzerinterface anzeigen
-     * - Prüfen, ob gültige Benutzerdaten vorhanden sind
-     * - Anzeigen der Daten oder einer Nachricht, wenn keine Daten vorhanden sind
-     */
-    if (data && !data.error && data.user && data.user.firstname) {
-        // Wenn Benutzerdaten existieren: Daten in den DOM einfügen
-        domfirstName.innerHTML = data.user.firstname;
-        domlastName.innerHTML = data.user.lastname;
-        inputBirthYear.value = data.user.geburtsjahr || '';
-    } else {
-        // Wenn keine Benutzerdaten vorhanden: Standardnachricht anzeigen
-        domfirstName.innerHTML = "No user information";
-        domlastName.innerHTML = "No user information";
-        inputBirthYear.value = "";
-    }
-  
-    // _______________________________________________________________
-    // Daten zur Datenbank hinzufügen - CREATE Operation
-    // _______________________________________________________________
-  
-    // DOM-Elemente für die Eingabefelder und den Speichern-Button auswählen
-    const inputFirstName = document.querySelector('#inputFirstName');
-    const inputLastName = document.querySelector('#inputLastName');
-    const inputBirthYear = document.querySelector('#inputBirthday');
-    const inputStreet = document.querySelector('#inputStreet');
-    const inputPostcode = document.querySelector('#inputPostcode');
-    const inputCity = document.querySelector('#inputCity');
-    const inputPhone = document.querySelector('#inputPhone');
-    const saveButton = document.querySelector('#btnSaveAdditionalInfo');
-  
-    /**
-     * Event-Listener für den Speichern-Button
-     * Speichert die eingegebenen Daten in der Datenbank
-     */
-    saveButton.addEventListener('click', async () => {
-        // Benutzereingaben auslesen
-        let firstName = inputFirstName.value;
-        let lastName = inputLastName.value;
-        let birthYear = inputBirthYear.value;
-        let street = inputStreet.value;
-        let postcode = inputPostcode.value;
-        let city = inputCity.value;
-        let phone = inputPhone.value;
-        
-        // API-Endpoint für das Erstellen von Profildaten
-        const url = '/api/profile/createProfile.php';
-        
-        // Daten-Objekt für die API-Anfrage erstellen
-        const data = {
-            firstname: firstName,
-            lastname: lastName
-            birthyear: birthYear,
-            street: street,
-            postcode: postcode,
-            city: city,
-            phone: phone
-        };
-        
-        // Daten zur API senden und Ergebnis abwarten
-        const dataAdded = await addData(url, data);
-        console.log(dataAdded);
-        
-        // Wenn erfolgreich gespeichert: Seite neu laden, um aktualisierte Daten anzuzeigen
-        if (dataAdded && !dataAdded.error) {
-            window.location.reload();
-        }
-    });
-  
-    /**
-     * Sendet Daten per POST-Anfrage an die API
-     * 
-     * @param {string} url - API-Endpoint
-     * @param {Object} data - Zu sendende Daten
-     * @returns {Object} API-Antwort oder Fehlerinformationen
-     */
-    async function addData(url, data) {
-        try {
-            // POST-Anfrage mit JSON-Daten senden
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            return await response.json();
-        } catch (error) {
-            // Fehler abfangen und strukturierte Fehlermeldung zurückgeben
-            console.error(error);
-            return { error: 'Failed to add data' };
-        }
-    }
-  
-    // _______________________________________________________________
-    // Daten aktualisieren - UPDATE Operation
-    // _______________________________________________________________
-  
-    // Button zum Speichern des Geburtsjahrs auswählen
-    const buttonUpdateUserData = document.querySelector('#buttonUpdateUserData');
-  
-    /**
-     * Event-Listener für den Button zum Aktualisieren des Geburtsjahrs
-     * Sendet das aktualisierte Geburtsjahr an die API
-     */
-    buttonUpdateUserData.addEventListener('click', async () => {
-        // Eingabewert auslesen
-        const firstNameInput = inputFirstName.value;
-        const lastNameInput = inputLastName.value;
-        const birthYearInput = inputBirthYear.value;
-        const streetInput = inputStreet.value;
-        const postcodeInput = inputPostcode.value;
-        const cityInput = inputCity.value;
-        const phoneInput = inputPhone.value;
-        
-        // API-Endpoint für das Aktualisieren von Profildaten
-        const url = '/api/profile/updateProfile.php';
-        
-        // Daten-Objekt für die API-Anfrage erstellen
-        const data = {
-            firstname: firstNameInput,
-            lastname: lastNameInput,
-            birthyear: birthYearInput
-            street: streetInput,
-            postcode: postcodeInput,
-            city: cityInput,
-            phone: phoneInput
-        };
-        
-        // Daten zur API senden und Ergebnis abwarten
-        const dataUpdated = await updateData(url, data);
-        console.log(dataUpdated);
-        
-        // Wenn erfolgreich aktualisiert: Seite neu laden, um aktualisierte Daten anzuzeigen
-        if (dataUpdated && !dataUpdated.error) {
-            window.location.reload();
-        }
-    });
-  
-    /**
-     * Sendet Daten per PUT-Anfrage an die API
-     * 
-     * @param {string} url - API-Endpoint
-     * @param {Object} data - Zu aktualisierende Daten
-     * @returns {Object} API-Antwort oder Fehlerinformationen
-     */
-    async function updateData(url, data) {
-        try {
-            // PUT-Anfrage mit JSON-Daten senden
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            return await response.json();
-        } catch (error) {
-            // Fehler abfangen und strukturierte Fehlermeldung zurückgeben
-            console.error(error);
-            return { error: 'Failed to update data' };
-        }
-    }
-  
-})();
+        const response = await fetch('/api/profile/readProfile.php');
+        const data = await response.json();
 
-/* AUSKOMMENTIERT
-// ______________________________________________________________
-// Loading data from the API
-// ______________________________________________________________
+        if (data.error) {
+            console.warn(data.error);
+            return;
+        }
 
-async function loadData() {
+        // Werte ins Formular schreiben
+        inputFirstName.value = data.firstname || '';
+        inputLastName.value = data.lastname || '';
+        inputBirthdate.value = data.birthdate || '';
+        inputStreet.value = data.street || '';
+        inputPostcode.value = data.postcode || '';
+        inputCity.value = data.city || '';
+        inputPhone.value = data.phone || '';
+
+    } catch (error) {
+        console.error('Fehler beim Laden des Profils:', error);
+    }
+}
+
+// Seite: Profildaten direkt beim Laden einfügen
+window.addEventListener('DOMContentLoaded', loadProfile);
+
+
+
+/* async function loadData() {
     const url = '/api/profile/readProfile.php'; // mit korrekter API-URL ersetzen
     try {
         const response = await fetch(url);
@@ -306,7 +191,9 @@ domstreet.innerHTML = data.user.street;
 dompostcode.innerHTML = data.user.postcode;
 domcity.innerHTML = data.user.city;
 domphone.innerHTML = data.user.phone;
+ */
 
+/*
 // ______________________________________________________________
 // Adding Vorname und Nachname to the Database
 // ______________________________________________________________
