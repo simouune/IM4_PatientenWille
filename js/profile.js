@@ -134,103 +134,93 @@ async function loadProfile() {
             return;
         }
 
+        const user = data.user;
+
         // Werte ins Formular schreiben
-        inputFirstName.value = data.firstname || '';
-        inputLastName.value = data.lastname || '';
-        inputBirthdate.value = data.birthdate || '';
-        inputStreet.value = data.street || '';
-        inputPostcode.value = data.postcode || '';
-        inputCity.value = data.city || '';
-        inputPhone.value = data.phone || '';
+        inputFirstName.value = user.firstname || '';
+        inputLastName.value = user.lastname || '';
+        inputBirthdate.value = user.birthdate || '';
+        inputStreet.value = user.street || '';
+        inputPostcode.value = user.postcode || '';
+        inputCity.value = user.city || '';
+        inputPhone.value = user.phone || '';
+        inputEmail.value = user.email || '';XMLDocument
 
     } catch (error) {
         console.error('Fehler beim Laden des Profils:', error);
     }
 }
 
-// Seite: Profildaten direkt beim Laden einfügen
 window.addEventListener('DOMContentLoaded', loadProfile);
 
+// ______________________________________________________________
+// Daten aus der Datenbank updaten - UPDATE Operation
+// ______________________________________________________________
 
+// Button zum Speichern des Geburtsjahrs auswählen
+const saveUpdateButton = document.querySelector('#btnSave');
 
-/* async function loadData() {
-    const url = '/api/profile/readProfile.php'; // mit korrekter API-URL ersetzen
-    try {
-        const response = await fetch(url);
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-}
-const data = await loadData();
-console.log(data); // gibt die Daten der API oder false in der Konsole aus
-
-const domfirstName = document.querySelector('#firstName');
-const domlastName = document.querySelector('#lastName');
-const domemail = document.querySelector('#email');
-const dombirthdate = document.querySelector('#birthdate');
-const domstreet = document.querySelector('#street');
-const dompostcode = document.querySelector('#postcode');
-const domcity = document.querySelector('#city');
-const domphone = document.querySelector('#phone');
-
-function formatDateSwiss(dateString) {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
-}
-
-domfirstName.innerHTML = data.user.firstname;
-domlastName.innerHTML = data.user.lastname;
-domemail.innerHTML = data.user.email;
-dombirthdate.innerHTML = formatDateSwiss(data.user.birthdate); // Formatierung anwenden
-domstreet.innerHTML = data.user.street;
-dompostcode.innerHTML = data.user.postcode;
-domcity.innerHTML = data.user.city;
-domphone.innerHTML = data.user.phone;
+/**
+ * Event-Listener für den Button zum Aktualisieren des Geburtsjahrs
+ * Sendet das aktualisierte Geburtsjahr an die API
  */
+saveUpdateButton.addEventListener('click', async () => {
+    // Eingabewert auslesen
+    const firstname = inputFirstName.value;
+    const lastname = inputLastName.value;
+    const birthdate = inputBirthdate.value;
+    const street = inputStreet.value;
+    const postcode = inputPostcode.value;
+    const city = inputCity.value;
+    const phone = inputPhone.value;
+    const email = document.querySelector('#inputEmail')?.value || ''; // Sicherstellen, dass das Email-Feld existiert
 
-/*
-// ______________________________________________________________
-// Adding Vorname und Nachname to the Database
-// ______________________________________________________________
+    // API-Endpoint für das Aktualisieren von Profildaten
+    const url = '/api/profile/updateProfile.php';
 
-const inputFirstName = document.querySelector('#inputFirstName');
-const inputLastName = document.querySelector('#inputLastName');
-const saveButton = document.querySelector('#btnSaveAdditionalInfos');
-
-saveButton.addEventListener('click', async () => {
-    let firstName = inputFirstName.value;
-    let lastName = inputLastName.value;
-    const url = '/api/profile/createProfile.php'; // mit korrekter API-URL ersetzen
+    // Daten-Objekt für die API-Anfrage erstellen
     const data = {
-        firstname: firstName,
-        lastname: lastName
+        firstname: firstname,
+        lastname: lastname,
+        birthdate: birthdate,
+        street: street, 
+        postcode: postcode,
+        city: city,
+        phone: phone,
+        email: email
     };
-    const dataAdded = await addData(url, data);
-    console.log(dataAdded); // gibt die Antwort der API oder false in der Konsole aus
+
+    // Daten zur API senden und Ergebnis abwarten
+    const dataUpdated = await updateData(url, data);
+    console.log(dataUpdated);
+
+    // Wenn erfolgreich aktualisiert: Seite neu laden, um aktualisierte Daten anzuzeigen
+    if (dataUpdated && !dataUpdated.error) {
+        window.location.reload();
+    }
 });
 
-async function addData(url, data) {
+/**
+ * Sendet Daten per PUT-Anfrage an die API
+ * 
+ * @param {string} url - API-Endpoint
+ * @param {Object} data - Zu aktualisierende Daten
+ * @returns {Object} API-Antwort oder Fehlerinformationen
+ */
+async function updateData(url, data) {
     try {
+        // PUT-Anfrage mit JSON-Daten senden
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         });
-        if (response.ok) {
-            location.reload(); // Reload the page after successful POST
-        } else {
-            console.error('Failed to post data:', response.statusText);
-        }
+        return await response.json();
     } catch (error) {
+        // Fehler abfangen und strukturierte Fehlermeldung zurückgeben
         console.error(error);
-        return false;
+        return { error: 'Failed to update data' };
     }
-} 
-*/
+}
