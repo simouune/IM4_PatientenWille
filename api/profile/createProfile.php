@@ -16,13 +16,21 @@ $loggedInUserId = $_SESSION['user_id'];
 
 // Read JSON input from fetch request
 $input = json_decode(file_get_contents('php://input'), true);
-
 // Validate input
-if (!isset($input['firstname']) || !isset($input['lastname']) || !isset($input['birthdate']) || !isset($input['street']) || !isset($input['postcode']) || !isset($input['city']) || !isset($input['phone'])) {
+if (
+    empty($input['firstname']) ||
+    empty($input['lastname']) ||
+    empty($input['birthdate']) ||
+    empty($input['street']) ||
+    empty($input['postcode']) ||
+    empty($input['city']) ||
+    empty($input['phone'])
+) {
     http_response_code(400);
-    echo json_encode(["error" => "Eingaben sind erforderlich."]);
+    echo json_encode(["error" => "Alle Felder müssen ausgefüllt sein."]);
     exit;
 }
+
 $firstname = trim($input['firstname']);
 $lastname = trim($input['lastname']);
 $birthdate = trim($input['birthdate']);
@@ -31,7 +39,8 @@ $postcode = trim($input['postcode']);
 $city = trim($input['city']);
 $phone = trim($input['phone']);
 
-// Fetch email from the users table
+//KOMMT ZUM READ
+/* // Fetch email from the users table
 $emailStmt = $pdo->prepare("SELECT email FROM users WHERE id = :user_id");
 $emailStmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
 $emailStmt->execute();
@@ -41,10 +50,10 @@ if (!$email) {
     http_response_code(500);
     echo json_encode(["error" => "E-Mail konnte nicht abgerufen werden."]);
     exit;
-}
+} */
 
 // Insert into DB
-$stmt = $pdo->prepare("INSERT INTO user_profiles (user_id, email, firstname, lastname) VALUES (:user_id, :email, :firstname, :lastname)");
+$stmt = $pdo->prepare("INSERT INTO user_profiles (user_id, firstname, lastname, birthdate, street, postcode, city, phone) VALUES (:user_id, :firstname, :lastname, :birthdate, :street, :postcode, :city, :phone)");
 $stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
 $stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
 $stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
@@ -53,7 +62,6 @@ $stmt->bindParam(':street', $street, PDO::PARAM_STR);
 $stmt->bindParam(':postcode', $postcode, PDO::PARAM_STR);
 $stmt->bindParam(':city', $city, PDO::PARAM_STR);
 $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
 try {
     $stmt->execute();
