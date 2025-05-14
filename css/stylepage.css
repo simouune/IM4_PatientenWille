@@ -7,7 +7,6 @@ body {
 .container {
   max-width: 400px;
   margin: auto;
-  padding: 1rem;
   background-color: white;
 }
 
@@ -126,20 +125,39 @@ button {
   margin: 1rem auto; /* <- Wichtig: Zentriert horizontal */
 }
 
-
-footer nav a {
-  margin: 0 0.5rem;
-  text-decoration: none;
-  color: gray;
-}
-footer nav a.active {
-  font-weight: bold;
-}
-
-
 footer {
-  width: 393px;
-  height: 91px;
-  flex-shrink: 0;
-  color: rgba(39, 45, 202, 1);
+  border-top: 2px solid #4A2ACC;
+  background-color: rgba(39, 44, 202, 0.1);
+  height: 105px;
+  display: flex;
+  align-items: center;     /* vertikal zentriert die .footer-nav */
+  justify-content: center; /* zentriert horizontal */
+  padding: 0;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  line-height: 0.5;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4A2ACC;
+  text-decoration: none;
+  font-family: Lato, sans-serif;
+  font-size: 14px; /* optional etwas kleiner */
+  font-weight: 700;
+  padding-bottom: 2rem;
+
+}
+
+.nav-item img {
+  width: 100px;   /* schön groß, aber nicht zu viel */
+  height: 100px;
+  margin-bottom: -0.5rem;
 }
