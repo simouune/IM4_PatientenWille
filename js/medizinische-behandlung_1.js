@@ -53,16 +53,30 @@ async function ladeAntworten() {
     try {
         const response = await fetch('api/medbehandlung1/readmedbehandlung1.php');
         const data = await response.json();
-        console.log("Antworten vom Server:", data);
 
-        if (data.status === "success" && data.antworten) {
-            document.querySelector('textarea[name="leben"]').value = data.antworten.leben || "";
-            document.querySelector('textarea[name="lebensqualitaet"]').value = data.antworten.lebensqualitaet || "";
-            document.querySelector('textarea[name="sterben"]').value = data.antworten.sterben || "";
-            document.querySelector('textarea[name="behandlung"]').value = data.antworten.behandlung || "";
+        if (data.success && Array.isArray(data.antworten)) {
+            data.antworten.forEach(a => {
+                if (a.frage_id == 101) document.querySelector('textarea[name="leben"]').value = a.antwort;
+                if (a.frage_id == 102) document.querySelector('textarea[name="lebensqualitaet"]').value = a.antwort;
+                if (a.frage_id == 103) document.querySelector('textarea[name="sterben"]').value = a.antwort;
+                if (a.frage_id == 104) document.querySelector('textarea[name="behandlung"]').value = a.antwort;
+            });
         }
     } catch (error) {
         console.error("Fehler beim Laden der Antworten:", error);
     }
 }
 
+ document.getElementById('saveBtn').addEventListener('click', async () => {
+        const success = await saveData();
+        if (success) {
+            window.location.href = "medbehandlung2.html";  // Gehe zur nächsten Seite
+        }
+    });
+
+    document.getElementById('zwischenspeicherBtn').addEventListener('click', async () => {
+        const success = await saveData();
+        if (success) {
+            window.location.href = "uebersicht.html";  // Gehe zur Übersichtsseite
+        }
+    });

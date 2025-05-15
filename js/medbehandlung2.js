@@ -108,12 +108,12 @@ const saveAndExitBtn = document.getElementById('saveAndExitBtn');
 
 saveAndNextBtn.addEventListener('click', () => {
   sendAnswers(() => {
-    window.location.href = 'übersicht.html'; // Hier deine Übersichtsseite eintragen
+    window.location.href = 'uebersicht.html'; // Hier deine Übersichtsseite eintragen
   });
 });
 
 saveAndExitBtn.addEventListener('click', () => {
   sendAnswers(() => {
-    window.location.href = 'übersicht.html'; // Gleiche oder andere Seite
+    window.location.href = 'uebersicht.html'; // Gleiche oder andere Seite
   });
 });
