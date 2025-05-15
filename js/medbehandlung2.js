@@ -1,3 +1,38 @@
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('api/medbehandlung2/readmedbehandlung2.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        const gespeicherteAntworten = data.antworten;
+
+        Object.entries(gespeicherteAntworten).forEach(([frageId, antwort]) => {
+          // Speichere als boolean ins answers-Objekt, damit der Rest weiter funktioniert
+          answers[frageId] = (antwort === "Ja");
+
+          // Frage visuell markieren
+          const element = document.querySelector(`[data-id="${frageId}"]`);
+          if (element) {
+            element.classList.add("grayed");
+
+            // Button "Ja" oder "Nein" markieren
+            const button = element.querySelector(`[onclick="answerQuestion('${frageId}', ${answers[frageId]})"]`);
+            if (button) {
+              button.classList.add("selected");
+            }
+          }
+        });
+
+        checkDependencies();
+      } else {
+        console.error("Fehler beim Laden:", data);
+      }
+    })
+    .catch(err => {
+      console.error("Fehler beim Abrufen der gespeicherten Antworten:", err);
+    });
+});
+
+
 const answers = {};
 
 function answerQuestion(id, value) {
@@ -13,8 +48,8 @@ function answerQuestion(id, value) {
   // Zur nächsten sichtbaren Frage scrollen
   scrollToNextVisibleQuestion(id);
 
-  // Antwort an Server senden
-  sendAnswerToServer(id, value);
+  // Antwort an Server senden (optional, kann man auch nur bei Buttons machen)
+  // sendAnswerToServer();
 }
 
 function checkDependencies() {
@@ -25,29 +60,34 @@ function checkDependencies() {
 
     const id = q.dataset.id;
 
-    // Wenn 1a "Nein", dann 1b & 1c ausgrauen
     if (answers["1a"] === false && (id === "1b" || id === "1c")) {
       q.classList.add("grayed");
     }
   });
 }
 
-function sendAnswerToServer(frageId, antwort) {
-  console.log("Sende an Server:", frageId, antwort); // Moved outside of headers
-  fetch('api/save_answer.php', {
+function sendAnswers(callback) {
+  fetch('api/medbehandlung2/updatemedbehandlung2.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      frage_id: frageId,
-      antwort: antwort,
-      benutzer_id: 123 // ⛳ TODO: dynamisch setzen (z. B. per Session)
-    })
+    body: JSON.stringify(
+      Object.entries(answers).map(([frage_id, antwort]) => ({
+        frage_id,
+        antwort: antwort === true ? "Ja" : "Nein"
+      }))
+    )
   })
-  .then(response => response.text())
-  .then(data => console.log('Server-Antwort:', data))
-  .catch(error => console.error('Fehler beim Senden:', error));
+  .then(response => response.json()) // nehme an, dein PHP sendet JSON zurück
+  .then(data => {
+    console.log('Server-Antwort:', data);
+    if (callback) callback();
+  })
+  .catch(error => {
+    console.error('Fehler beim Senden:', error);
+    if (callback) callback(); // trotzdem weiterleiten, falls gewünscht
+  });
 }
 
 function scrollToNextVisibleQuestion(currentId) {
@@ -62,5 +102,18 @@ function scrollToNextVisibleQuestion(currentId) {
   }
 }
 
-//console.log("Sende an Server:", frageId, antwort);
-// Moved outside of headers
+// Button-Elemente definieren (wichtig!)
+const saveAndNextBtn = document.getElementById('saveAndNextBtn');
+const saveAndExitBtn = document.getElementById('saveAndExitBtn');
+
+saveAndNextBtn.addEventListener('click', () => {
+  sendAnswers(() => {
+    window.location.href = 'übersicht.html'; // Hier deine Übersichtsseite eintragen
+  });
+});
+
+saveAndExitBtn.addEventListener('click', () => {
+  sendAnswers(() => {
+    window.location.href = 'übersicht.html'; // Gleiche oder andere Seite
+  });
+});
