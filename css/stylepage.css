@@ -196,3 +196,20 @@ footer {
   height: 100px;
   margin-bottom: -0.5rem;
 }
+
+form textarea {
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  font-family: Lato, sans-serif;
+}
+
+button[type="submit"] {
+  background-color: #3b3bbf;
+  color: white;
+  font-weight: bold;
+  border-radius: 14px;
+  height: 54px;
+  width: 191px;
+}

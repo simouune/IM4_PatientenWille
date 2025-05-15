@@ -18,15 +18,20 @@
 </header>
 
     <main>
-      <h2>Werteerklärung</h2>
-      <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
-      <textarea placeholder="Was macht mein Leben heute lebenswert?"></textarea>
-      <textarea placeholder="Was bedeutet für Sie Lebensqualität?"></textarea>
-      <textarea placeholder="Was kommt Ihnen in den Sinn, wenn Sie ans Sterben denken?"></textarea>
-      <textarea placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
-      <button>Speichern & Weiter</button>
-      <a href="zwischenspeicher">Zwischenspeichern & Beenden</a>
-    </main>
+  <h2>Werteerklärung</h2>
+  <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
+
+  <form action="api/save_answer.php" method="POST">
+    <textarea name="leben" placeholder="Was macht mein Leben heute lebenswert?"></textarea>
+    <textarea name="lebensqualitaet" placeholder="Was bedeutet für Sie Lebensqualität?"></textarea>
+    <textarea name="sterben" placeholder="Was kommt Ihnen in den Sinn, wenn Sie ans Sterben denken?"></textarea>
+    <textarea name="behandlung" placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
+
+    <button id="saveBtn" type="button">Speichern & Weiter</button>
+  </form>
+
+  <a href="zwischenspeicher">Zwischenspeichern & Beenden</a>
+</main>
 
     <footer>
       <div class="footer-nav">
@@ -36,5 +41,6 @@
       </div>
     </footer>
   </div>
+   <script type="module" src="js/medizinische-behandlung_1.js"></script>
 </body>
 </html>
