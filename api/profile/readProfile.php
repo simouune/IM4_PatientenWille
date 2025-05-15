@@ -11,11 +11,26 @@ if (!isset($_SESSION['user_id'])) {
 // DB-Verbindung
 require_once '../../system/config.php';
 
-// Logged-in user ID
+// Eingeloggte User-ID
 $loggedInUserId = $_SESSION['user_id'];
 
-// Get the logged-in user's data
-$stmt = $pdo->prepare("SELECT user_id, firstname, lastname, birthdate, street, postcode, city, phone FROM user_profiles WHERE user_id = :user_id");
+// Profildaten + E-Mail-Adresse abrufen
+$stmt = $pdo->prepare("
+    SELECT 
+        up.user_id, 
+        up.firstname, 
+        up.lastname, 
+        up.birthdate, 
+        up.street, 
+        up.postcode, 
+        up.city, 
+        up.phone,
+        u.email
+    FROM user_profiles up
+    JOIN users u ON up.user_id = u.id
+    WHERE up.user_id = :user_id
+");
+
 $stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
 $stmt->execute();
 
@@ -27,8 +42,7 @@ if ($user) {
         "status" => "success",
         "user" => $user
     ]);
-} 
-else {
+} else {
     http_response_code(404);
     header('Content-Type: application/json');
     echo json_encode(["error" => "User not found"]);
