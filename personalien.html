@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Protected Page</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stylepage.css" />
   </head>
 
   <body>
@@ -14,12 +14,13 @@
       <p>Nachname</p><input type="text" id="inputLastName" placeholder="Nachname" />
       <p>Geburtstag</p><input type="date" id="inputBirthdate" placeholder="Geburtsdatum" />
       <p>Strasse</p><input type="text" id="inputStreet" placeholder="Strasse" />
-      <p>PLZ</p><input type="text" id="inputPostcode" placeholder="PLZ" />
+      <p>PLZ</p><input type="number" id="inputPostcode" placeholder="PLZ" />
       <p>Ort</p><input type="text" id="inputCity" placeholder="Ort" />
-      <p>E-Mail</p><input type="text" id="inputEmail" placeholder="E-Mail" />
-      <p>Telefon</p><input type="text" id="inputPhone" placeholder="Telefon" />
-
-      <button id="btnSave">Speichern & Weiter</button>
+      <p>E-Mail</p><input type="email" id="inputEmail" readonly>
+      <p>Telefon</p><input type="tel" id="inputPhone" placeholder="Telefon" />
+      
+      <button id="btnSave" onclick="location.href='medizinische-behandlung_1.html'">Speichern & Weiter</button>
+      <button id="btnSaveBack" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
       <p id="fehlermeldung"></p>
     </section>
 
