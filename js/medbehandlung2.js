@@ -62,5 +62,5 @@ function scrollToNextVisibleQuestion(currentId) {
   }
 }
 
-console.log("Sende an Server:", frageId, antwort);
+//console.log("Sende an Server:", frageId, antwort);
 // Moved outside of headers
