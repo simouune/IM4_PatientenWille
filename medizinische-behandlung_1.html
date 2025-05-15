@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medizinische Behandlung</title>
   <link rel="stylesheet" href="css/stylepage.css">
 </head>
+
 <body>
   <div class="container">
     <header>
-  <div class="header-content">
-    <h1>Medizinische Behandlung (1/7)</h1>
-    <button class="info-button">i</button>
-  </div>
-  <a href="personalien.html" class="next-button">Weiter</a>
-  <div class="header-line"></div>
-</header>
-
+      <div class="header-content">
+        <h1>Medizinische Behandlung (1/7)</h1>
+        <button class="info-button">i</button>
+      </div>
+      <a href="personalien.html" class="next-button">Weiter</a>
+      <div class="header-line"></div>
+    </header>
     <main>
-  <h2>Werteerklärung</h2>
-  <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
+      <h2>Werteerklärung</h2>
+      <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
 
-  <form action="api/save_answer.php" method="POST">
-    <textarea name="leben" placeholder="Was macht mein Leben heute lebenswert?"></textarea>
-    <textarea name="lebensqualitaet" placeholder="Was bedeutet für Sie Lebensqualität?"></textarea>
-    <textarea name="sterben" placeholder="Was kommt Ihnen in den Sinn, wenn Sie ans Sterben denken?"></textarea>
-    <textarea name="behandlung" placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
+      <form action="api/medbehandlung1/createmedbehandlung1.php" method="POST">
+        <textarea name="leben" placeholder="Was macht mein Leben heute lebenswert?"></textarea>
+        <textarea name="lebensqualitaet" placeholder="Was bedeutet für Sie Lebensqualität?"></textarea>
+        <textarea name="sterben" placeholder="Was kommt Ihnen in den Sinn, wenn Sie ans Sterben denken?"></textarea>
+        <textarea name="behandlung"
+          placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
 
-    <button id="saveBtn" type="button">Speichern & Weiter</button>
-  </form>
+        <button id="saveBtn" type="button">Speichern & Weiter</button>
+      </form>
 
-  <a href="zwischenspeicher">Zwischenspeichern & Beenden</a>
-</main>
+      <a href="zwischenspeicher">Zwischenspeichern & Beenden</a>
+    </main>
 
     <footer>
       <div class="footer-nav">
@@ -41,6 +43,7 @@
       </div>
     </footer>
   </div>
-   <script type="module" src="js/medizinische-behandlung_1.js"></script>
+  <script type="module" src="js/medizinische-behandlung_1.js"></script>
 </body>
+
 </html>

@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once '../system/config.php';
+require_once '../../system/config.php';
 
 $loggedInUserId = $_SESSION['user_id'];
 $input = json_decode(file_get_contents('php://input'), true);
