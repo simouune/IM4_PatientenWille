@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':email' => $email,
         ':password' => $hashedPassword,
     ]);
-
+    
     echo json_encode(["status" => "success"]);
 } else {
     echo json_encode(["status" => "error", "message" => "Ungültige Anfrage"]);

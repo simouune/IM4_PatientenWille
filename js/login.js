@@ -1,4 +1,5 @@
 // login.js
+console.log("Login script loaded");
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -16,7 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (result.status === "success") {
       alert("Login successful!");
-      window.location.href = "protected.html";
+      window.location.href = "uebersicht.html";
     } else {
       alert(result.message || "Login failed.");
     }
