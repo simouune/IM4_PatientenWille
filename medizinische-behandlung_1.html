@@ -13,28 +13,34 @@
     <header>
       <div class="header-content">
         <h1>Medizinische Behandlung (1/2)</h1>
-        <button class="info-button">i</button>
+        <a class="info-button" href="#">
+            <img src="images/infobutton.svg" alt="Info Button" />
+          </a>
       </div>
+      <a href="uebersicht.html" class="back-button">Zurück</a>
       <a href="personalien.html" class="next-button">Weiter</a>
       <div class="header-line"></div>
     </header>
     <main>
+      <body class="med-behandlung">
+      <div class="container">
       <h2>Werteerklärung</h2>
-      <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
-
+      <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen,Überzeugungen 
+         und Glaubenssätze fest...</p>
+      </div>
       <form action="api/medbehandlung1/createmedbehandlung1.php" method="POST">
         <textarea name="leben" placeholder="Was macht mein Leben heute lebenswert?"></textarea>
         <textarea name="lebensqualitaet" placeholder="Was bedeutet für Sie Lebensqualität?"></textarea>
         <textarea name="sterben" placeholder="Was kommt Ihnen in den Sinn, wenn Sie ans Sterben denken?"></textarea>
         <textarea name="behandlung"
           placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
-
-       <button id="saveBtn" type="button">Speichern & Weiter</button>
-      <button id="zwischenspeicherBtn" type="button">Zwischenspeichern & Weiter</button>
-      </form>
-
-      <a href="zwischenspeicher">Zwischenspeichern & Beenden</a>
     </main>
+
+    <section class="SaveButtons">
+        <button class="btnSave" onclick="location.href='medbehandlung2.html'">Speichern & Weiter</button>
+        <button class="btnSaveBack" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
+        <p id="fehlermeldung"></p>
+      </section>
 
     <footer>
       <div class="footer-nav">
