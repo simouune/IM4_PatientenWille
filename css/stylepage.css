@@ -12,17 +12,13 @@ h1 {
 }
 
 h2 {
-display: flex;
-width: 262px;
-height: 58px;
-flex-direction: column;
-justify-content: center;
-flex-shrink: 0;
-color: #272DCA;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
+  color: #272DCA;
+  margin-top: 2rem;
+  margin-bottom: 0.3rem;  /* kleiner Abstand unter dem Titel */
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
@@ -33,9 +29,18 @@ font-style: normal;
 font-weight: 400;
 }
 
+.med-behandlung p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: left; /* Ändere auf "left" statt "justify" */
+  margin: 0 0 2rem 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .container {
   max-width: 100%;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   box-sizing: border-box;
 }
 
