@@ -3,16 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Protected Page</title>
-    <link rel="stylesheet" href="css/stylepage.css" />
+    <link rel="stylesheet" href="css/stylepage.css"/>
   </head>
 
   <body>
-    <div class="container">
+    <div>
       <header>
         <div class="header-content">
           <h1>Personalien</h1>
-          <button class="info-button">i</button>
+          <a class="info-button" href="#">
+            <img src="images/infobutton.svg" alt="Info Button" />
+          </a>
         </div>
+        <a href="uebersicht.html" class="back-button">Zurück</a>
         <a href="personalien.html" class="next-button">Weiter</a>
         <div class="header-line"></div>
       </header>
@@ -26,9 +29,11 @@
         <p>Ort</p><input type="text" id="inputCity" placeholder="Ort" />
         <p>E-Mail</p><input type="email" id="inputEmail" readonly>
         <p>Telefon</p><input type="tel" id="inputPhone" placeholder="Telefon" />
-        
-        <button id="btnSave" onclick="location.href='medizinische-behandlung_1.html'">Speichern & Weiter</button>
-        <button id="btnSaveBack" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
+      </section>
+
+      <section class="SaveButtons">
+        <button class="btnSave" onclick="location.href='medizinische-behandlung_1.html'">Speichern & Weiter</button>
+        <button class="btnSaveBack" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
         <p id="fehlermeldung"></p>
       </section>
 
