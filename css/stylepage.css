@@ -12,17 +12,9 @@ h1 {
 }
 
 h2 {
-display: flex;
-width: 262px;
-height: 58px;
-flex-direction: column;
-justify-content: center;
-flex-shrink: 0;
-color: #272DCA;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
+  font-size: 30px;
+  font-weight: bold;
+  color: #272DCA;
 }
 
 p {
@@ -93,11 +85,11 @@ header {
 footer {
   border-top: 2px solid #4A2ACC;
   background-color: rgba(39, 44, 202, 0.1);
-  height: 105px;
+  padding: 15px 0px 30px 0px;
+  height: 150px;
   display: flex;
   align-items: center;     /* vertikal zentriert die .footer-nav */
   justify-content: center; /* zentriert horizontal */
-  padding: 0;
 }
 
 .footer-nav {
@@ -110,24 +102,25 @@ footer {
 
 .nav-item {
   display: flex;
+  color: #272DCA;
   flex-direction: column;
   align-items: center;
-  color: #4A2ACC;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px; /* optional etwas kleiner */
-  font-weight: 700;
-  padding-bottom: 2rem;
-
+  font-size: 30px;
+  font-weight: bold;
+  flex: 1; /* Gleicher Platz für alle Navigationspunkte */
+  text-align: center; /* Zentriert den Text innerhalb des flex-Containers */
 }
 
 .nav-item img {
-  width: 100px;   /* schön groß, aber nicht zu viel */
+  width: 100px;
   height: 100px;
-  margin-bottom: -0.5rem;
+  margin-bottom: 20px;
 }
 
-.SaveButtons {
+
+.SaveButtons, #medbehandlung2-form {
   margin-top: 80px;
   display: flex;
   flex-direction: column; /* Buttons untereinander anordnen */
@@ -136,7 +129,7 @@ footer {
   gap: 2rem;              /* Abstand zwischen den Buttons */
 }
 
-.btnSave {
+.btnSave, #saveAndNextBtn{
   background-color: #272DCA;
   color: white;
   font-size: 40px;
@@ -148,7 +141,7 @@ footer {
   cursor: pointer;
 }
 
-.btnSaveBack {
+.btnSaveBack, #saveAndExitBtn{
   color: #272DCA;
   background-color: transparent;
   border: none;
@@ -156,36 +149,6 @@ footer {
   font-weight: bold;
 }
 
-
-
-/*button {
-  color: rgb(73, 69, 69);
-  border: none;
-  padding: 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 1rem;
-  display: flex;
-  width: 191px;
-  height: 54px;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-  color: #000000;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%; /* 24px */
-  /*letter-spacing: -0.304px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem auto;
-}
 
 
 /* ------------------------------------ */
@@ -258,7 +221,7 @@ button[type="submit"] {
 /* Personalien */
 /* ------------------------------------ */
 
-#personalien {
+#personalien{
   padding-left: 50px;
   padding-right: 85px;
 }
@@ -279,4 +242,27 @@ button[type="submit"] {
 #personalien p {
   margin-bottom: 15px;
   margin-top: 50px;
+}
+
+
+
+/* ------------------------------------ */
+/* Medizinische Behandlung 2 */
+/* ------------------------------------ */
+
+#medbehandlung2{
+  padding-left: 50px;
+  padding-right: 85px;
+}
+
+#medbehandlung2 h2 {
+  font-size: 40px;
+}
+
+#medbehandlung2 p{
+  font-size: 40px;
+}
+
+.medbehandlung2_questions{
+  font-size: 40px !important;
 }

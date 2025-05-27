@@ -3,44 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <title>Login</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stylepage.css" />
   </head>
+
   <body>
-    <h1>Medizinische Behandlungs (2/2)</h1>
-    <h2>Therapieziel – ich möchte lebensverlängernde Massnahmen nur bei Erhaltung der Lebensqualität und
-        wünsche folgende Behandlungen:</h2>
+    <header>
+      <div class="header-content">
+        <h1>Medizinische Behandlung (2/2)</h1>
+        <a class="info-button" href="#">
+          <img src="images/infobutton.svg" alt="Info Button" />
+        </a>
+      </div>
+      <a href="medizinische-behandlung_1.html" class="back-button">Zurück</a>
+      <a href="uebersicht.html" class="next-button">Weiter</a>
+      <div class="header-line"></div>
+    </header>
 
-    <div id="form-container">
-    <div class="question" data-id="1a">
-      <p>a. Behandlung auf der Intensivstation</p>
-      <button onclick="answerQuestion('1a', true)">Ja</button>
-      <button onclick="answerQuestion('1a', false)">Nein</button>
-    </div>
+    <section id="medbehandlung2">
+      <h2>Therapieziel – ich möchte lebensverlängernde Massnahmen nur bei Erhaltung der Lebensqualität und wünsche folgende Behandlungen:</h2>
 
-    <div class="question" data-id="1b" data-depends="1a">
-      <p>b. Künstliche Beatmung über einen Schlauch (in der Regel über den Mund in die Luftröhre, medizinisch: Tubus, Intubation)</p>
-      <button onclick="answerQuestion('1b', true)">Ja</button>
-      <button onclick="answerQuestion('1b', false)">Nein</button>
-    </div>
+      <div id="form-container">
+        <div class="question" data-id="1a">
+          <p>a. Behandlung auf der Intensivstation</p>
+          <button onclick="answerQuestion('1a', true)">Ja</button>
+          <button onclick="answerQuestion('1a', false)">Nein</button>
+        </div>
+  
+        <div class="question" data-id="1b" data-depends="1a">
+          <p class="medbehandlung2_questions">b. Künstliche Beatmung über einen Schlauch (in der Regel über den Mund in die Luftröhre, medizinisch: Tubus, Intubation)</p>
+          <button onclick="answerQuestion('1b', true)">Ja</button>
+          <button onclick="answerQuestion('1b', false)">Nein</button>
+        </div>
+  
+        <div class="question" data-id="1c">
+          <p>c. Herz-Lungen-Wiederbelebung (Reanimation)</p>
+          <button onclick="answerQuestion('1c', true)">Ja</button>
+          <button onclick="answerQuestion('1c', false)">Nein</button>
+        </div>
+  
+        <div class="question" data-id="1d">
+          <p>d. Künstliche Ernährung / Flüssigkeit über Magensonde oder Vene</p>
+          <button onclick="answerQuestion('1d', true)">Ja</button>
+          <button onclick="answerQuestion('1d', false)">Nein</button>
+        </div>
+      </div>
+      
+    </section>
 
-    <div class="question" data-id="1c">
-      <p>c. Herz-Lungen-Wiederbelebung (Reanimation)</p>
-      <button onclick="answerQuestion('1c', true)">Ja</button>
-      <button onclick="answerQuestion('1c', false)">Nein</button>
-    </div>
-
-     <div class="question" data-id="1d">
-      <p>d. Künstliche Ernährung / Flüssigkeit über Magensonde oder Vene</p>
-      <button onclick="answerQuestion('1d', true)">Ja</button>
-      <button onclick="answerQuestion('1d', false)">Nein</button>
-    </div>
-  <form id="medbehandlung2-form">
-  <!-- Deine Fragen hier als Inputs, z.B. Radio-Buttons oder Ähnliches -->
+  <section id="medbehandlung2-form">
   <button id="saveAndNextBtn" type="button">Speichern & Beenden</button>
   <button id="saveAndExitBtn" type="button">Zwischenspeichern & Beenden</button>
-</form>
+  </section>
 
-  </div>
+  <footer>
+    <div class="footer-nav">
+      <a class="nav-item" href="willkommen.html"><img src="images/navWillkommen.svg" /><span>Willkommen</span></a>
+      <a class="nav-item" href="uebersicht.html"><img src="images/navUebersicht.svg" /><span>Übersicht</span></a>
+      <a class="nav-item" href="personalien.html"><img src="images/navKonto.svg" /><span>Konto</span></a>
+    </div>
+  </footer>
+
+  
   <script src="js/medbehandlung2.js"></script>
   </body>
 </html>
