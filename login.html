@@ -1,32 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <title>Login</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stylepage.css" />
   </head>
   <body>
-    <div>
-      <img src="images/logo-patientenwille-herz.png" alt="Patientenwille Logo" />
-      </div>
 
-    <h1>Bei Patienten Wille anmelden</h1>
-
+    <div class="loginHeader">
+      <img class="logoHerz" src="./images/Logo_Patientenwille_Herz.png" alt="Patientenwille Logo" />
+      <h1>Bei Patienten Wille anmelden</h1>  
+    
+    </div>
+    
     <form id="loginForm">
-      <div>
-        <p>Email</p>
+
+      <div class="loginEmail">
+        <p>E-Mail</p>
         <input type="email" id="email" required />
       </div>
       
-      <div>
-        <p>Password</p>
+      <div class="loginPassword">
+        <p>Passwort</p>
         <input type="password" id="password" required />
       </div>
-      <button type="submit" >Login</button>
+
+      <button class="btnSubmit" type="submit" >Anmelden</button>      
     </form>
 
-    <p>Don’t have an account? <a href="register.html">Register here</a>.</p>
+    <a class="btnOtherOption" href="register.html">Ich habe noch kein Konto</a>
 
     <script src="js/login.js"></script>
   </body>
 </html>
+

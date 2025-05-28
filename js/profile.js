@@ -10,7 +10,7 @@ const inputPostcode = document.querySelector('#inputPostcode');
 const inputCity = document.querySelector('#inputCity');
 const inputPhone = document.querySelector('#inputPhone');
 const inputEmail = document.querySelector('#inputEmail');
-const saveButton = document.querySelector('#btnSave');
+const saveButton = document.querySelectorAll('.btnSave');
 const fehlermeldungElement = document.querySelector('#fehlermeldung');
 
 
@@ -18,40 +18,44 @@ const fehlermeldungElement = document.querySelector('#fehlermeldung');
 // CREATE & UPDATE Operation – Speichern-Button
 // _______________________________________________________________
 
-saveButton.addEventListener('click', async () => {
-    fehlermeldungElement.textContent = '';
+saveButton.forEach(button => {
+    button.addEventListener('click', async (event) => {
+        event.preventDefault(); // Verhindert, dass der Button direkt weiterleitet
 
-    // Eingaben erfassen (ohne Email!)
-    const data = {
-        firstname: inputFirstName.value,
-        lastname: inputLastName.value,
-        birthdate: inputBirthdate.value,
-        street: inputStreet.value,
-        postcode: inputPostcode.value,
-        city: inputCity.value,
-        phone: inputPhone.value
-    };
+        fehlermeldungElement.textContent = '';
 
-    const isExistingProfile = await checkIfProfileExists();
+        // Eingaben erfassen
+        const data = {
+            firstname: inputFirstName.value,
+            lastname: inputLastName.value,
+            birthdate: inputBirthdate.value,
+            street: inputStreet.value,
+            postcode: inputPostcode.value,
+            city: inputCity.value,
+            phone: inputPhone.value
+        };
 
-    const url = isExistingProfile
-        ? '/api/profile/updateProfile.php'
-        : '/api/profile/createProfile.php';
+        const isExistingProfile = await checkIfProfileExists();
 
-    const responseData = isExistingProfile
-        ? await updateData(url, data)
-        : await addData(url, data);
+        const url = isExistingProfile
+            ? '/api/profile/updateProfile.php'
+            : '/api/profile/createProfile.php';
 
-    if (responseData.error) {
-        fehlermeldungElement.textContent = responseData.error;
-        fehlermeldungElement.style.color = 'red';
-        return;
-    }
+        const responseData = isExistingProfile
+            ? await updateData(url, data)
+            : await addData(url, data);
 
-    // Optional: Erfolgsmeldung oder Reload
-    // alert('Profil gespeichert!');
-    // window.location.reload();
+        if (responseData.error) {
+            fehlermeldungElement.textContent = responseData.error;
+            fehlermeldungElement.style.color = 'red';
+            return;
+        }
+
+        // Nach erfolgreichem Speichern weiterleiten
+        window.location.href = 'medizinische-behandlung_1.html';
+    });
 });
+
 
 
 // _______________________________________________________________

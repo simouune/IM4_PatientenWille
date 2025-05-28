@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Register</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Registrieren</title>
+    <link rel="stylesheet" href="css/stylepage.css" />
   </head>
   <body>
-    <h1>Register</h1>
 
-    <form id="registerForm">
-      <div>
-        <label>Email</label>
+    <div class="registerHeader">
+      <img class="logoHerz" src="./images/Logo_Patientenwille_Herz.png" alt="Patientenwille Logo" />
+      <h1>Bei Patienten Wille registrieren</h1>  
+    
+    </div>
+
+    <form class="registerForm">
+
+      <div class="registerEmail">
+        <p>E-Mail</p>
         <input type="email" id="email" required />
       </div>
-      <div>
-        <label>Password</label>
+
+      <div class="registerPassword">
+        <p>Passwort</p>
         <input type="password" id="password" required />
       </div>
-      <button type="submit">Register</button>
+
+      <button class="btnRegister" type="submit">Registrieren</button>
     </form>
 
-    <p>Already have an account? <a href="login.html">Login here</a>.</p>
+    <a class="btnOtherOption" href="login.html">Ich habe bereits ein Konto</a>
 
     <script src="js/register.js"></script>
   </body>
