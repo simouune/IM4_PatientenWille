@@ -4,6 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 150px; /* Add padding equal to footer height */
 }
 
 h1 {
@@ -103,7 +104,7 @@ header {
 
 footer {
   border-top: 2px solid #4A2ACC;
-  background-color: rgba(39, 44, 202, 0.1);
+  background-color: #E9EAFA;
   padding: 15px 0px 30px 0px;
   height: 150px;
   display: flex;
@@ -118,6 +119,14 @@ footer {
   width: 100%;
   line-height: 0.5;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 
 .nav-item {
   display: flex;
@@ -406,3 +415,67 @@ button[type="submit"] {
   background-color: #272DCA;
   color: white;
 } */
+
+
+/* ------------------------------------ */
+/* Fertig ausgefüllt, Abschluss E-Mail und Abschluss Download */
+/* ------------------------------------ */
+
+.fertigHeader, .abschlussHeaderMail, .abschlussHeaderDownload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px
+}
+
+.fertigHeader p, .abschlussHeaderDownload p {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.abschlussHeaderMail p {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 200px
+}
+
+
+.btnEmail, .btnUebersicht {
+  background-color: #272DCA;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  padding: 3rem 6rem;     
+  border: none;
+  border-radius: 45px;  
+  cursor: pointer;
+  margin: 80px auto 40px auto; 
+}
+
+.btnDownload{
+  color: #272DCA;
+  background-color: transparent;
+  border: none;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 100px;
+}
+
+.btnDownloadPdf {
+  background-color: transparent;
+  color: #272DCA;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  padding: 3rem 6rem;     
+  border-color: #272DCA;
+  border-style: solid;
+  border-radius: 45px;  
+  cursor: pointer;
+  margin-top: 70px;
+  margin-bottom: 100px;
+}
