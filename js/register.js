@@ -1,4 +1,3 @@
-// register.js
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -10,6 +9,9 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     return;
   }
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 60000); // 10 Sekunden Timeout
+
   try {
     const response = await fetch("/api/register.php", {
       method: "POST",
@@ -18,7 +20,14 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ email, password }),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error(`Serverfehler: ${response.status} ${response.statusText}`);
+    }
 
     const result = await response.json();
 
@@ -29,7 +38,13 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
       alert(result.message || "Registrierung fehlgeschlagen.");
     }
   } catch (error) {
-    console.error("Fehler:", error);
-    alert("Etwas ist schief gelaufen!");
+    clearTimeout(timeoutId); // sicherheitshalber auch hier
+
+    if (error.name === "AbortError") {
+      alert("Die Anfrage hat zu lange gedauert (Timeout). Bitte versuche es erneut.");
+    } else {
+      console.error("Fehler:", error);
+      alert("Registrierung fehlgeschlagen. Bitte überprüfe deine Verbindung oder versuche es später erneut.");
+    }
   }
 });
