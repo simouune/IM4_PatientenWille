@@ -7,22 +7,25 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const response = await fetch("api/login.php", {
+    const response = await fetch("/api/login.php", {
       method: "POST",
-      // credentials: 'include', // uncomment if front-end & back-end are on different domains
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ email, password }),
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password }),
     });
+
     const result = await response.json();
 
     if (result.status === "success") {
-      alert("Login successful!");
+      alert("Login erfolgreich!");
       window.location.href = "uebersicht.html";
     } else {
-      alert(result.message || "Login failed.");
+      alert(result.message || "Login fehlgeschlagen.");
     }
   } catch (error) {
-    console.error("Error:", error);
-    alert("Something went wrong!");
+    console.error("Fehler:", error);
+    alert("Etwas ist schief gelaufen!");
   }
 });
