@@ -20,6 +20,7 @@ const fehlermeldungElement = document.querySelector('#fehlermeldung');
 
 saveButton.forEach(button => {
     button.addEventListener('click', async (event) => {
+        console.log("Speichern-Button geklickt");
         event.preventDefault(); // Verhindert, dass der Button direkt weiterleitet
 
         fehlermeldungElement.textContent = '';
@@ -34,16 +35,23 @@ saveButton.forEach(button => {
             city: inputCity.value,
             phone: inputPhone.value
         };
+        console.log('Daten zum Speichern:', data);
 
-        const isExistingProfile = await checkIfProfileExists();
+        // const isExistingProfile = await checkIfProfileExists();
 
-        const url = isExistingProfile
-            ? '/api/profile/updateProfile.php'
-            : '/api/profile/createProfile.php';
+        // console.log('Profil existiert:', isExistingProfile);
 
-        const responseData = isExistingProfile
-            ? await updateData(url, data)
-            : await addData(url, data);
+        // Validierung der Eingaben
+
+        const url = '/api/profile/createProfile.php';
+
+        console.log(url, 'URL zum Speichern der Daten');
+
+        //const responseData = isExistingProfile
+        //    ? await updateData(url, data)
+        //    : await addData(url, data);
+
+            await updateData(url, data)
 
         if (responseData.error) {
             fehlermeldungElement.textContent = responseData.error;
@@ -64,7 +72,9 @@ saveButton.forEach(button => {
 
 async function checkIfProfileExists() {
     try {
+        console.log('Prüfe, ob Profil existiert...');
         const response = await fetch('/api/profile/readProfile.php');
+        console.log('Antwort vom Server erhalten:', response);
         const data = await response.json();
         return data?.user != null;
     } catch (error) {
@@ -74,6 +84,7 @@ async function checkIfProfileExists() {
 }
 
 async function addData(url, data) {
+    console.log('Daten an den Server senden:', data);
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -88,6 +99,7 @@ async function addData(url, data) {
 }
 
 async function updateData(url, data) {
+    console.log('Daten aktualisieren:', data);
     try {
         const response = await fetch(url, {
             method: 'PUT',

@@ -43,6 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     if ($success) {
+        // Get the new user's ID
+        $userId = $pdo->lastInsertId();
+
+        // Insert an empty profile for the new user
+        $insertProfile = $pdo->prepare("INSERT INTO user_profiles (user_id) VALUES (:user_id)");
+        $insertProfile->execute([':user_id' => $userId]);
+
         echo json_encode(["status" => "success"]);
     } else {
         echo json_encode([

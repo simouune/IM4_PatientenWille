@@ -3,20 +3,29 @@ console.log("medizinische-behandlung_1.js loaded");
 document.addEventListener("DOMContentLoaded", function () {
     ladeAntworten(); // Antworten vom Server laden
 
-    // Event-Listener für Buttons
-    document.getElementsByClassName('saveBtn').addEventListener('click', async () => {
-        const success = await saveData();
-        if (success) {
-            window.location.href = "medbehandlung2.html";
-        }
-    });
+    // Fix: Add event listener to the first .btnSave button
+    const btnSave = document.querySelector('.btnSave');
+    if (btnSave) {
+        btnSave.addEventListener('click', async (e) => {
+            e.preventDefault(); // Prevent default form submit!
+            console.log("Save button clicked");
+            const success = await saveData();
+            if (success) {
+                window.location.href = "medbehandlung2.html";
+            }
+        });
+    }
 
-    document.getElementsByClassName('btnSaveBack').addEventListener('click', async () => {
-        const success = await saveData();
-        if (success) {
-            window.location.href = "uebersicht.html";
-        }
-    });
+    const btnSaveBack = document.querySelector('.btnSaveBack');
+    if (btnSaveBack) {
+        btnSaveBack.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const success = await saveData();
+            if (success) {
+                window.location.href = "uebersicht.html";
+            }
+        });
+    }
 });
 
 // Antworten beim Laden der Seite holen und in die Textareas einfügen

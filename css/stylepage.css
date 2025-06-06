@@ -6,6 +6,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   padding-bottom: 150px; /* Add padding equal to footer height */
+  margin: 0;
 }
 
 h1 {
@@ -107,10 +108,14 @@ footer {
   border-top: 2px solid #4A2ACC;
   background-color: #E9EAFA;
   padding: 15px 0px 30px 0px;
-  height: 150px;
+  height: 50px;
   display: flex;
   align-items: center;     /* vertikal zentriert die .footer-nav */
   justify-content: center; /* zentriert horizontal */
+    position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 .footer-nav {
@@ -121,13 +126,6 @@ footer {
   line-height: 0.5;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
-}
-
 
 .nav-item {
   display: flex;
@@ -136,21 +134,20 @@ footer {
   align-items: center;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  font-size: 12px;
   font-weight: bold;
   flex: 1; /* Gleicher Platz für alle Navigationspunkte */
   text-align: center; /* Zentriert den Text innerhalb des flex-Containers */
 }
 
 .nav-item img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
+  width: 50px;
+  margin-bottom: 5px;
 }
 
 
 .SaveButtons, #medbehandlung2-form {
-  margin-top: 80px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column; /* Buttons untereinander anordnen */
   align-items: center;    /* Buttons horizontal zentrieren */
@@ -161,10 +158,10 @@ footer {
 .btnSave, #saveAndNextBtn{
   background-color: #272DCA;
   color: white;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  padding: 3rem 6rem;     
+  padding: 10px 30px;     
   border: none;
   border-radius: 40px;  
   cursor: pointer;
@@ -174,7 +171,7 @@ footer {
   color: #272DCA;
   background-color: transparent;
   border: none;
-  font-size: 40px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -184,8 +181,8 @@ footer {
   font-size: 20px !important;
   font-weight: bold;
   border-radius: 14px;
-  height: 54px;
-  width: 191px;
+  height: 75px;
+  width: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -323,7 +320,7 @@ ul.list li a {
 
 form input, textarea {
   display: block;
-  width: 100%;
+  width: 80%;
   margin: 0.5rem 0;
   padding: 0.5rem;
   border-radius: 4px;
@@ -351,8 +348,8 @@ button[type="submit"] {
   color: white;
   font-weight: bold;
   border-radius: 14px;
-  height: 54px;
-  width: 191px;
+  height: 80px;
+  width: 220px;
 }
 
 /* ------------------------------------ */
