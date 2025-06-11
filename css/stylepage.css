@@ -11,7 +11,7 @@ body {
 
 h1 {
   padding-top: 40px;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 h2 {
@@ -27,7 +27,7 @@ h2 {
 p {
 text-align: justify;
 font-family: Arial, Helvetica, sans-serif;
-font-size: 40px;
+font-size: 20px;
 font-style: normal;
 font-weight: 400;
 }
@@ -65,8 +65,8 @@ header {
 }
 
 .info-button {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +75,7 @@ header {
 
 .next-button{
   position: absolute;
-  font-size: 30px;
+  font-size: 20px;
   right: 1rem;
   top: 3rem;
   color: #3b3bbf;
@@ -85,7 +85,7 @@ header {
 
 .back-button {
   position: absolute;
-  font-size: 30px;
+  font-size: 20px;
   left: 1rem;
   top: 3rem;
   color: #3b3bbf;
@@ -160,33 +160,21 @@ footer {
   color: white;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
-  padding: 10px 30px;     
+  margin-top: 20px;
+  text-align: center;     
   border: none;
-  border-radius: 40px;  
+  border-radius: 20px;  
   cursor: pointer;
+  height: 60px;
+  width: 80%;
 }
 
 .btnSaveBack, #saveAndExitBtn{
   color: #272DCA;
   background-color: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-}
-
-.finish-button {
-  background-color: rgb(65, 57, 57) !important;  /* TESTFARBE */
-  color: white !important;
-  font-size: 20px !important;
-  font-weight: bold;
-  border-radius: 14px;
-  height: 75px;
-  width: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
 }
 
 
@@ -202,36 +190,45 @@ footer {
 
 }
 
+.loginHeader h1, .registerHeader h1 {
+  justify-content: center;
+  text-align: center;
+}
+
 .logoHerz {
-  margin-top: 300px;
+  margin-top: 150px;
   display: flex;
   justify-content: center;
 }
 
+
 #loginForm, #registerForm {
-  padding-left: 40px;
-  padding-right: 40px;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: left;
 }
 
+.loginEmail, .loginPassword, .registerEmail, .registerPassword {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .loginPassword p, .loginEmail p, .registerEmail p, .registerPassword p {
-  font-size: 40px;
+  font-size: 20px;
   margin-bottom: 15px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .loginPassword input, .loginEmail input, .registerPassword input, .registerEmail input {
   border: #272DCA;
   border-style: solid;
-  border-radius: 25px;
+  border-radius: 20px;
   color: gray;
-  font-size: 40px;
+  font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
-  height: 90px;
+  height: 60px;
   display: flex;
   align-items: center; 
   box-sizing: border-box; 
@@ -241,24 +238,35 @@ footer {
 .btnSubmit, .btnRegister {
   background-color: #272DCA;
   color: white;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  padding: 4rem 12rem;
+  padding-left: 20px;
+  padding-right: 20px;
   border: none;
-  border-radius: 40px !important;
   cursor: pointer;
-  margin: 80px auto 40px auto; /* Zentriert den Button horizontal */
+  margin: 80px auto 30px auto; /* Zentriert den Button horizontal */
   display: flex;
   align-items: center; /* Zentriert den Inhalt des Buttons */
   justify-content: center; /* Zentriert den Inhalt des Buttons */
 }
 
+
+button[type="submit"] {
+  background-color: #272DCA;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  height: 60px;
+  width: 60%;
+}
+
+
 .btnOtherOption {
   color: #272DCA;
   background-color: transparent;
   border: none;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   text-decoration: none;
   text-align: center; /* Text zentrieren */
@@ -343,13 +351,18 @@ form textarea {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-button[type="submit"] {
-  background-color: #3b3bbf;
-  color: white;
+.finish-button {
+  background-color: rgb(65, 57, 57) !important;  /* TESTFARBE */
+  color: white !important;
+  font-size: 20px !important;
   font-weight: bold;
-  border-radius: 14px;
-  height: 80px;
+  border-radius: 20px;
+  height: 65px;
   width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
 /* ------------------------------------ */
@@ -357,26 +370,26 @@ button[type="submit"] {
 /* ------------------------------------ */
 
 #personalien{
-  padding-left: 50px;
-  padding-right: 85px;
+  padding-left: 20px;
+  padding-right: 65px;
 }
 
 #personalien input {
   border: #272DCA;
   border-style: solid;
-  border-radius: 25px;
+  border-radius: 20px;
   padding-left: 20px;
   padding-right: 20px;
   color: gray;
-  font-size: 40px;
+  font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   width: 100%;
-  height: 90px;
+  height: 60px;
 }
 
 #personalien p {
   margin-bottom: 15px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 
@@ -422,17 +435,21 @@ button[type="submit"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 30px
+  margin: 0 20px
+}
+
+.fertigHeader h1, .abschlussHeaderMail h1, .abschlussHeaderDownload h1 {
+  text-align: center;
 }
 
 .fertigHeader p, .abschlussHeaderDownload p {
-  font-size: 40px;
+  font-size: 20px;
   text-align: center;
   margin-top: 20px;
 }
 
 .abschlussHeaderMail p {
-  font-size: 40px;
+  font-size: 20px;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 200px
@@ -442,21 +459,24 @@ button[type="submit"] {
 .btnEmail, .btnUebersicht {
   background-color: #272DCA;
   color: white;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  padding: 3rem 6rem;     
+  padding-left: 20px;
+  padding-right: 20px;
   border: none;
   border-radius: 45px;  
   cursor: pointer;
-  margin: 80px auto 40px auto; 
+  margin: 60px auto 20px auto; 
+  width: 80%;
+  height: 60px;
 }
 
 .btnDownload{
   color: #272DCA;
   background-color: transparent;
   border: none;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 100px;
 }
@@ -464,14 +484,16 @@ button[type="submit"] {
 .btnDownloadPdf {
   background-color: transparent;
   color: #272DCA;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  padding: 3rem 6rem;     
   border-color: #272DCA;
   border-style: solid;
-  border-radius: 45px;  
+  border-radius: 20px;  
   cursor: pointer;
   margin-top: 70px;
   margin-bottom: 100px;
+  height: 60px;
+  width: 100%;
+  padding: 20px;
 }
