@@ -18,14 +18,14 @@ const fehlermeldungElement = document.querySelector('#fehlermeldung');
 // CREATE & UPDATE Operation – Speichern-Button
 // _______________________________________________________________
 
-saveButton.forEach(button => {
+const saveButtons = document.querySelectorAll('.btnSave, .btnSaveBack');
+
+saveButtons.forEach(button => {
     button.addEventListener('click', async (event) => {
-        console.log("Speichern-Button geklickt");
-        event.preventDefault(); // Verhindert, dass der Button direkt weiterleitet
+        event.preventDefault();
 
         fehlermeldungElement.textContent = '';
 
-        // Eingaben erfassen
         const data = {
             firstname: inputFirstName.value,
             lastname: inputLastName.value,
@@ -35,23 +35,20 @@ saveButton.forEach(button => {
             city: inputCity.value,
             phone: inputPhone.value
         };
-        console.log('Daten zum Speichern:', data);
 
-        // const isExistingProfile = await checkIfProfileExists();
+        const urlCheck = '/api/profile/readProfile.php';
+        const urlCreate = '/api/profile/createProfile.php';
+        const urlUpdate = '/api/profile/updateProfile.php';
 
-        // console.log('Profil existiert:', isExistingProfile);
+        let responseData;
 
-        // Validierung der Eingaben
+        const profileExists = await checkIfProfileExists();
 
-        const url = '/api/profile/createProfile.php';
-
-        console.log(url, 'URL zum Speichern der Daten');
-
-        //const responseData = isExistingProfile
-        //    ? await updateData(url, data)
-        //    : await addData(url, data);
-
-            await updateData(url, data)
+        if (profileExists) {
+            responseData = await updateData(urlUpdate, data);
+        } else {
+            responseData = await addData(urlCreate, data);
+        }
 
         if (responseData.error) {
             fehlermeldungElement.textContent = responseData.error;
@@ -59,10 +56,12 @@ saveButton.forEach(button => {
             return;
         }
 
-        // Nach erfolgreichem Speichern weiterleiten
-        window.location.href = 'medizinische-behandlung_1.html';
+        // Weiterleitung nach erfolgreichem Speichern
+        const nextPage = button.dataset.next || 'medizinische-behandlung_1.html';
+        window.location.href = nextPage;
     });
 });
+
 
 
 

@@ -4,19 +4,18 @@ session_start();
 if (!isset($_SESSION['user_id'])) {
     http_response_code(401);
     header('Content-Type: application/json');
-    echo json_encode(["error" => "Unauthorized"]);
+    echo json_encode(["error" => "Nicht eingeloggt"]);
     exit;
 }
 
-// DB-Verbindung
 require_once '../../system/config.php';
 
-// Logged-in user ID
 $loggedInUserId = $_SESSION['user_id'];
 
-// Read JSON input from fetch request
+// JSON-Daten auslesen
 $input = json_decode(file_get_contents('php://input'), true);
-// Validate input
+
+// Eingaben prüfen
 if (
     empty($input['firstname']) ||
     empty($input['lastname']) ||
@@ -31,6 +30,7 @@ if (
     exit;
 }
 
+// Eingaben bereinigen
 $firstname = trim($input['firstname']);
 $lastname = trim($input['lastname']);
 $birthdate = trim($input['birthdate']);
@@ -39,74 +39,58 @@ $postcode = trim($input['postcode']);
 $city = trim($input['city']);
 $phone = trim($input['phone']);
 
-//KOMMT ZUM READ
-/* // Fetch email from the users table
-$emailStmt = $pdo->prepare("SELECT email FROM users WHERE id = :user_id");
-$emailStmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
-$emailStmt->execute();
-$email = $emailStmt->fetchColumn();
-
-if (!$email) {
-    http_response_code(500);
-    echo json_encode(["error" => "E-Mail konnte nicht abgerufen werden."]);
-    exit;
-} */
-
-// Insert into DB
-$stmt = $pdo->prepare("INSERT INTO user_profiles (user_id, firstname, lastname, birthdate, street, postcode, city, phone) VALUES (:user_id, :firstname, :lastname, :birthdate, :street, :postcode, :city, :phone)");
-$stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
-$stmt->bindParam(':firstname', $firstname, PDO::PARAM_STR);
-$stmt->bindParam(':lastname', $lastname, PDO::PARAM_STR);
-$stmt->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
-$stmt->bindParam(':street', $street, PDO::PARAM_STR);
-$stmt->bindParam(':postcode', $postcode, PDO::PARAM_STR);
-$stmt->bindParam(':city', $city, PDO::PARAM_STR);
-$stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-
 try {
-    $stmt->execute();
-    echo json_encode(["success" => true, "message" => "Profil erfolgreich eröffnet!"]);
+    // Prüfen, ob Profil bereits existiert
+    $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM user_profiles WHERE user_id = :user_id");
+    $checkStmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
+    $checkStmt->execute();
+    $exists = $checkStmt->fetchColumn() > 0;
+
+    if ($exists) {
+        // Profil aktualisieren
+        $updateStmt = $pdo->prepare("
+            UPDATE user_profiles
+            SET firstname = :firstname,
+                lastname = :lastname,
+                birthdate = :birthdate,
+                street = :street,
+                postcode = :postcode,
+                city = :city,
+                phone = :phone
+            WHERE user_id = :user_id
+        ");
+        $updateStmt->execute([
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':birthdate' => $birthdate,
+            ':street' => $street,
+            ':postcode' => $postcode,
+            ':city' => $city,
+            ':phone' => $phone,
+            ':user_id' => $loggedInUserId
+        ]);
+        echo json_encode(["success" => true, "message" => "Profil aktualisiert."]);
+    } else {
+        // Neues Profil anlegen
+        $insertStmt = $pdo->prepare("
+            INSERT INTO user_profiles (user_id, firstname, lastname, birthdate, street, postcode, city, phone)
+            VALUES (:user_id, :firstname, :lastname, :birthdate, :street, :postcode, :city, :phone)
+        ");
+        $insertStmt->execute([
+            ':user_id' => $loggedInUserId,
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':birthdate' => $birthdate,
+            ':street' => $street,
+            ':postcode' => $postcode,
+            ':city' => $city,
+            ':phone' => $phone
+        ]);
+        echo json_encode(["success" => true, "message" => "Profil erfolgreich gespeichert."]);
+    }
+
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["error" => "Datenbankfehler: " . $e->getMessage()]);
 }
-
-
-/* AUSKOMMENTIERT
-// Get the logged-in user's data
-// Fetch the logged-in user's data
-$stmt = $pdo->prepare("
-    SELECT 
-        up.user_id,
-        up.firstname,
-        up.lastname,
-        up.birthdate,
-        up.street,
-        up.postcode,
-        up.city,
-        up.phone,
-        u.email
-    FROM user_profiles up
-    JOIN users u ON up.user_id = u.id
-    WHERE up.user_id = :user_id
-");
-$stmt->bindParam(':user_id', $loggedInUserId, PDO::PARAM_INT);
-$stmt->execute();
-
-// Insert a new user profile
-$insertStmt = $pdo->prepare("
-    INSERT INTO user_profiles (user_id, firstname, lastname)
-    VALUES (:user_id, :firstname, :lastname)
-");
-$insertStmt->bindParam(':user_id', $newUserId, PDO::PARAM_INT);
-$insertStmt->bindParam(':firstname', $newFirstname, PDO::PARAM_STR);
-$insertStmt->bindParam(':lastname', $newLastname, PDO::PARAM_STR);
-
-// Example values for the new user profile
-$newUserId = 1;
-$newFirstname = 'Benjamin';
-$newLastname = 'Hanimann';
-
-$insertStmt->execute();
 ?>
- */
