@@ -333,11 +333,19 @@ ul.list li a {
 form input, textarea {
   display: block;
   width: 80%;
+  margin-bottom: 2rem;
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  border-radius: 16px;           /* Mehr abgerundet */
+  border: 1.5px solid #272DCA;   /* Dünner blauer Rand */
+  background-color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
 }
+
 
 .zwischenspeicher {
   display: flex;
@@ -347,13 +355,6 @@ form input, textarea {
   margin-top: 1rem;
 }
 
-form textarea {
-  background-color: #f3f3f3;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 .finish-button {
   background-color: rgb(65, 57, 57) !important;  /* TESTFARBE */
