@@ -66,40 +66,27 @@ function checkDependencies() {
   });
 }
 
-function sendAnswers(callback) {
-  fetch('api/medbehandlung2/updatemedbehandlung2.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-      Object.entries(answers).map(([frage_id, antwort]) => ({
-        frage_id,
-        antwort: antwort === true ? "Ja" : "Nein"
-      }))
-    )
-  })
-  .then(response => response.json()) // nehme an, dein PHP sendet JSON zurück
-  .then(data => {
-    console.log('Server-Antwort:', data);
-    if (callback) callback();
-  })
-  .catch(error => {
-    console.error('Fehler beim Senden:', error);
-    if (callback) callback(); // trotzdem weiterleiten, falls gewünscht
-  });
+// Antworten speichern (nur Radio-Buttons)
+function collectAnswers() {
+    const frageIds = ['1a', '1b', '1c', '1d'];
+    return frageIds.map(id => {
+        const checked = document.querySelector(`input[name="q${id}"]:checked`);
+        return {
+            frage_id: id,
+            antwort: checked ? (checked.value === "ja" ? "Ja" : "Nein") : ""
+        };
+    }).filter(a => a.antwort); // Nur beantwortete speichern
 }
 
-function scrollToNextVisibleQuestion(currentId) {
-  const questions = Array.from(document.querySelectorAll(".question"));
-  const currentIndex = questions.findIndex(q => q.dataset.id === currentId);
-
-  for (let i = currentIndex + 1; i < questions.length; i++) {
-    if (!questions[i].classList.contains("grayed")) {
-      questions[i].scrollIntoView({ behavior: "smooth", block: "center" });
-      break;
-    }
-  }
+async function sendAnswers(callback) {
+    const antworten = collectAnswers();
+    const response = await fetch('api/medbehandlung2/createmedbehandlung2.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(antworten)
+    });
+    const data = await response.json();
+    if (callback) callback(data);
 }
 
 // Button-Elemente definieren (wichtig!)
@@ -117,3 +104,27 @@ saveAndExitBtn.addEventListener('click', () => {
     window.location.href = 'uebersicht.html'; // Gleiche oder andere Seite
   });
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const response = await fetch('api/medbehandlung2/readmedbehandlung2.php');
+    const data = await response.json();
+    if(data.status === "success" && data.antworten) {
+        Object.entries(data.antworten).forEach(([frageId, antwort]) => {
+            const value = antwort.toLowerCase();
+            const radio = document.querySelector(`input[name="q${frageId}"][value="${value}"]`);
+            if(radio) radio.checked = true;
+        });
+    }
+});
+
+function scrollToNextVisibleQuestion(currentId) {
+  const questions = Array.from(document.querySelectorAll(".question"));
+  const currentIndex = questions.findIndex(q => q.dataset.id === currentId);
+
+  for (let i = currentIndex + 1; i < questions.length; i++) {
+    if (!questions[i].classList.contains("grayed")) {
+      questions[i].scrollIntoView({ behavior: "smooth", block: "center" });
+      break;
+    }
+  }
+}

@@ -47,6 +47,10 @@ font-weight: 400;
   box-sizing: border-box;
 }
 
+input[type="radio"]:checked {
+  accent-color: #272DCA; /* Blau */
+}
+
 /* ------------------------------------ */
 /* Header */
 /* ------------------------------------ */
