@@ -19,7 +19,7 @@ Unsere Zielgruppe sind Menschen, die sich mit dem Thema Patientenverfügung ause
 
 ### Vorgehen
 
-Zu Beginn unseres Projekts haben wir einen detaillierten **Figma-Prototypen** sowie einen **Screenflow** erstellt. Dies war für uns ein wertvoller Schritt, der uns in der späteren Umsetzung stark geholfen hat, da von Anfang an eine klare Vorstellung darüber bestand, wie die Anwendung aufgebaut und strukturiert sein sollte. Danach haben wir uns in den Content-Seiten aufgeteilt, damit jede Person in etwa gleich viel umzusetzen hatte, wobei sich diese Grenzen während der Umsetzung auch verschoben haben.
+Zu Beginn unseres Projekts haben wir einen detaillierten Figma-Prototypen sowie einen Screenflow erstellt. Dies war für uns ein wertvoller Schritt, der uns in der späteren Umsetzung stark geholfen hat, da von Anfang an eine klare Vorstellung darüber bestand, wie die Anwendung aufgebaut und strukturiert sein sollte. Danach haben wir uns in den Content-Seiten aufgeteilt, damit jede Person in etwa gleich viel umzusetzen hatte, wobei sich diese Grenzen während der Umsetzung auch verschoben haben.
 
 ---
 
@@ -27,7 +27,7 @@ Zu Beginn unseres Projekts haben wir einen detaillierten **Figma-Prototypen** so
 
 Während der Umsetzung gab es einige bewusste Abweichungen vom ursprünglichen Figma-Prototyp.<br>
 
-In Absprache mit Beni konzentrierten wir uns aufgrund des Aufwands auf die Umsetzung der ersten drei Seiten der Patientenverfügung – ein pragmatischer Schritt, um Qualität vor Umfang zu stellen. So wurde beispielsweise auch die vorgesehene Konto-Seite nicht umgesetzt und wir haben stattdessen im Footer bewusst auf die Personalien-Seite verlinkt. Auch die Anzeige in der Übersicht, wie viele Schritte noch auszufüllen sind, wurde deswegen nicht integriert. <br>
+In Absprache mit Beni konzentrierten wir uns aufgrund des Aufwands auf die Umsetzung der ersten drei Seiten der Patientenverfügung ("Personalien" sowie die ersten beiden Schritte von "Medizinische Behandlung") – ein pragmatischer Schritt, um Qualität vor Umfang zu stellen. So wurde beispielsweise auch die vorgesehene Konto-Seite nicht umgesetzt und wir haben stattdessen im Footer bewusst auf die Personalien-Seite verlinkt. Auch die Anzeige in der Übersicht, wie viele Schritte noch auszufüllen sind, wurde deswegen nicht integriert. <br>
 
 Ein weiterer kleiner Unterschied betraf den „Abschliessen“-Button auf der Übersicht-Seite: Dieser ist im WebApp bereits von Anfang an blau dargestellt, da er auf unserer Website klickbar ist (eigentlich wäre die Idee gewesen, dass dieser erst blau wird, sobald eben alles ausgefüllt ist). Aufgrund des überwiegenden Aufwands sowie des Zeitdrucks haben wir uns entschieden, dies aber wegzulassen. Des Weiteren wurde im ursprünglichen Figma-Prototyp der Logout-Button vergessen – dieser wurde in der finalen WebApp nun auf der Übersicht-Seite oben links ergänzt, um den Nutzerinnen und Nutzern eine klare Möglichkeit zum sicheren Ausloggen zu bieten. <br>
 
