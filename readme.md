@@ -1,71 +1,51 @@
-# 🔑👤 Authentifizierung Minimal (Boilerplate)
+Fachhochschule Graubünden, Multimedia Production<br>
+FS25, Interaktive Medien IV, 15. Juni 2025<br>
+Gruppe Carone<br>
+Carolina Resta & Simone Etter, mmp23c
 
-![Static Badge](https://img.shields.io/badge/Sprache-PHP-%23f7df1e)
-![Static Badge](https://img.shields.io/badge/Kurs-MMP_IM4-blue)
-![Last Changed](https://img.shields.io/endpoint?url=https://badges.crazy-internet.ch/im4_example.php)
+---
 
-> 🎨 Dieses Boilerplate kann entweder in einem Code-Along Schritt für Schritt gemeinsam erarbeitet werden oder fixfertig auf einem Webserver installiert werden.
+## Das Projekt
 
-Dieses Repository beinhaltet ein vollständiges, minimales Authenzifizierungs-System basierend auf PHP als Backend und HTML/CSS/JS als Frontend.
+### Kurzbeschreibung des Projekts
 
-Es ermöglicht Benutzern das `Registrieren`, `Anmelden`, `Abmelden` und den Zugriff auf eine `geschützte Seite` nach erfolgreicher Authentifizierung.
+Unser Projekt hatte das Ziel, eine WebApp zur Erstellung einer Patientenverfügung zu entwickeln, die die Nutzerinnen und Nutzer einfach, strukturiert und verständlich durch den Prozess führt. Ergänzend bietet die Anwendung eine Speicherfunktion, mit der die Daten jederzeit auch zu einem späteren Zeitpunkt weiterbearbeitet werden können.<br>
 
-# 🏁 Live - Version
+Zudem wäre das Ziel bei einer vollends ausgearbeiteten App, auch ausführliche Background- und Zusatzinfos zur Verfügung zu stellen, um auch komplexe medizinische Entscheidungen greifbar zu machen. Des Weiteren gäbe es dann ebenfalls die Möglichkeit, am Schluss die Patientenverfügung entweder per Mail oder per Download aus der WebApp fixfertig exportieren zu können.
 
-Du kannst Homely unter folgendem Link testen:
+### Zielgruppe
 
-[https://im4.crazy-internet.ch/](https://im4.crazy-internet.ch/)
+Unsere Zielgruppe sind Menschen, die sich mit dem Thema Patientenverfügung auseinandersetzen – oft mit dem Wunsch, ihre medizinischen Entscheidungen frühzeitig festzuhalten, um Angehörige im Ernstfall zu entlasten. Viele von ihnen haben bereits über eine Verfügung nachgedacht, aber bislang keine passende oder verständliche Lösung gefunden. Dabei stehen vor allem das Bedürfnis nach Klarheit, Sicherheit und Selbstbestimmung im Vordergrund. Sie wünschen sich Unterstützung, allerdings ohne das Gefühl bevormundet zu werden. Die bestehenden Formulare der Pro Senectute & Co. werden oft als zu komplex und unverständlich empfunden, wodurch Unsicherheit entsteht. Insbesondere die Angst, etwas falsch auszufüllen oder wichtige Punkte zu übersehen, ist weit verbreitet.
 
-## ⚙️ Installation
+### Vorgehen
 
-Um dieses Boilerplate auf dem eigenen Web-Server zu installieren, führe folgende Schritte aus:
+Zu Beginn unseres Projekts haben wir einen detaillierten **Figma-Prototypen** sowie einen **Screenflow** erstellt. Dies war für uns ein wertvoller Schritt, der uns in der späteren Umsetzung stark geholfen hat, da von Anfang an eine klare Vorstellung darüber bestand, wie die Anwendung aufgebaut und strukturiert sein sollte. Danach haben wir uns in den Content-Seiten aufgeteilt, damit jede Person in etwa gleich viel umzusetzen hatte, wobei sich diese Grenzen während der Umsetzung auch verschoben haben.
 
-### 1. Download
+---
 
-- [Klone das Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) über GitHub oder [downloade das Repository als ZIP Datei](https://docs.github.com/en/repositories/working-with-files/using-files/downloading-source-code-archives) auf deinen eigenen Computer.
+## Abweichungen zum Figma
 
-### 2. Datenbank
+Während der Umsetzung gab es einige bewusste Abweichungen vom ursprünglichen Figma-Prototyp.<br>
 
-- Erstelle eine neue Datenbank bei deinem Hoster (z.B. [Infomaniak](https://www.infomaniak.com/de/support/faq/1981/mysqlmariadb-benutzer-und-datenbanken-verwalten)).
+In Absprache mit Beni konzentrierten wir uns aufgrund des Aufwands auf die Umsetzung der ersten drei Seiten der Patientenverfügung – ein pragmatischer Schritt, um Qualität vor Umfang zu stellen. So wurde beispielsweise auch die vorgesehene Konto-Seite nicht umgesetzt und wir haben stattdessen im Footer bewusst auf die Personalien-Seite verlinkt. Auch die Anzeige in der Übersicht, wie viele Schritte noch auszufüllen sind, wurde deswegen nicht integriert. <br>
 
-- Importiere die Datei `system/database.sql` in die neue Datenbank, um die `users` Tabelle zu erstellen.
+Ein weiterer kleiner Unterschied betraf den „Abschliessen“-Button auf der Übersicht-Seite: Dieser ist im WebApp bereits von Anfang an blau dargestellt, da er auf unserer Website klickbar ist (eigentlich wäre die Idee gewesen, dass dieser erst blau wird, sobald eben alles ausgefüllt ist). Aufgrund des überwiegenden Aufwands sowie des Zeitdrucks haben wir uns entschieden, dies aber wegzulassen. Des Weiteren wurde im ursprünglichen Figma-Prototyp der Logout-Button vergessen – dieser wurde in der finalen WebApp nun auf der Übersicht-Seite oben links ergänzt, um den Nutzerinnen und Nutzern eine klare Möglichkeit zum sicheren Ausloggen zu bieten. <br>
 
-### 3. Code
+Ausserdem haben wir im jetzigen Stand der WebApp die verschiedenen Erklärvideos sowie das Willkommensvideo zu einem einzigen Video kombiniert, um den Produktionsaufwand im Rahmen zu halten. Bei einem echten Launch der WebApp wären diese Inhalte selbstverständlich als einzelne, thematisch getrennte Videos vorgesehen.
 
-- Benenne die Datei `system/config.php.blank` in `system/config.php` um.
+---
 
-- Passe die Datenbankverbindungsdaten in der Datei `system/config.php` an.
+## Learnings & Schwierigkeiten
 
-### 4. FTP Connect
+Ein zentrales Learning aus dem Projekt war die Erkenntnis, dass eine klare Aufgabenteilung – etwa eine Person für die Datenbankverknüpfung und das JavaScript und eine andere für das CSS – den Entwicklungsprozess effizienter gemacht hätte. Andererseits wären dadurch neue Lerneffekte insbesondere für die zweite Person verloren gegangen. Der gewählte Weg war also zwar teilweise herausfordernd – weil es mehr Absprache erforderte – aber im Sinne des Lernziels letztlich gewinnbringender. <br>
 
-- Erstelle eine neue FTP Verbindung mit dem SFTP Plugin gemäss [Anleitung im MMP 101](https://github.com/Interaktive-Medien/101-MMP/blob/main/resources/sftp.md).
+Im Verlauf der technischen Umsetzung traten vor allem im Bereich CSS Herausforderungen auf. Die Absprache darüber, wie bestimmte Elemente benannt, sortiert und aufgebaut werden sollen, war nicht immer eindeutig. In einigen Fällen kam es auch dazu, dass wir uns unbeabsichtigt gegenseitig in unseren Arbeitsschritten beeinflussten, was insbesondere beim CSS teilweise unerwünschte Auswirkungen hatte, da Änderungen von einer Person die Arbeit der anderen tangierten. Diese Erfahrungen haben uns nochmals gezeigt, wie wertvoll eine klare Kommunikation und strukturierter Code eben sind.
 
-# 📁 Struktur
+---
 
-## 🎨 Frontend
+## Fazit
+Auch wenn wir zu Beginn des Projekts schwer getan haben, wieder ins Programmieren reinzukommen und uns auch dieses Semester wieder viele Themen völlig neu waren, sind wir mit dem Resultat sehr zufrieden. Schritt für Schritt haben wir uns in die verschiedenen Bereiche eingearbeitet und das Wissen der letzten Semester repetiert. Gerade vor diesem Hintergrund sind wir stolz darauf, eine funktionierende WebApp umgesetzt zu haben, die im Grunde das bietet, was wir uns von Anfang an vorgestellt haben: eine Vereinfachung beim Ausfüllen der Patientenverfügung. 
 
-### root (Basis-Verzeichnis)
 
-- beinhaltet alle HTML-Dateien des Frontends.
-- beinhaltet die `.gitignore` Datei, welche die Dateien und Verzeichnisse ausblendet, die nicht auf GitHub hochgeladen werden sollen.
+Nichtsdestotrotz hatten wir natürlich auch wertvolle Hilfe, allen voran die Coachings mit Beni und Anja - herzlichen Dank an dieser Stelle! Ausserdem haben uns die Helferlein ChatGPT und GitHub Copilot ebenfalls extrem weitergeholfen. Dennoch war die Arbeit herausfordernd, aber auch sehr lehrreich – und wir konnten abermals viel Know-how gewinnen, das uns in zukünftigen Projekten sicher weiterhelfen wird.
 
-### js
-
-- beinhaltet alle JavaScript-Dateien des Frontends.
-
-### css
-
-- beinhaltet alle CSS-Dateien des Frontends.
-
-## 🤖 Backend
-
-### api
-
-- Beinhaltet alle API-Endpunkte des Backends.
-- Diese Dateien werden von `JavaScript` aufgerufen und geben eine Antwort an `JavaScript` zurück.
-
-### system
-
-- Beinhaltet die Konfigurationsdatei für die Datenbankverbindung.
-- Beinhaltet die Datei `database.sql`, die die `users` Tabelle erstellt.
-- Beinhaltet die Datei `config.php`, die die Konfiguration des Backends enthält.
