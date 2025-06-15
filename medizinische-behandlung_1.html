@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="css/stylepage.css">
 </head>
 
-<body class="med-behandlung">
-  <div class="container">
+<body>
+  <div>
 
     <header>
       <div class="header-content">
@@ -23,7 +23,8 @@
       <div class="header-line"></div>
     </header>
 
-    <main>
+    <main class="med-behandlung">
+    <div class="container">
       <h2>Werteerklärung</h2>
       <p>Im Folgenden halte ich meine wichtigsten Wertvorstellungen, Überzeugungen und Glaubenssätze fest...</p>
 
@@ -40,17 +41,17 @@
         <label for="behandlung" class="visually-hidden">Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?</label>
         <textarea id="behandlung" name="behandlung"
           placeholder="Gibt es Situationen, in denen Sie nicht mehr lebensverlängernd behandelt werden wollen?"></textarea>
-
-        <section class="SaveButtons">
-          <button class="btnSave" type="submit">Speichern & Weiter</button>
-          <button class="btnSaveBack" type="button" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
-          <p id="fehlermeldung"></p>
-        </section>
       </form>
+    </div>
     </main>
+    
+    <section class="SaveButtons">
+      <button class="btnSave" type="submit">Speichern & Weiter</button>
+      <button class="btnSaveBack" type="button" onclick="location.href='uebersicht.html'">Zwischenspeichern & Beenden</button>
+      <p id="fehlermeldung"></p>
+    </section>
 
-
-  </div>
+ 
 
   <footer>
     <div class="footer-nav">
@@ -68,6 +69,8 @@
       </a>
     </div>
   </footer>
+
+</div>
 
   <script type="module" src="js/medizinische-behandlung_1.js"></script>
   <script src="js/protected.js"></script>

@@ -32,8 +32,12 @@ font-style: normal;
 font-weight: 400;
 }
 
+/* ------------------------------------ */
+/* Med. Behandlung */
+/* ------------------------------------ */
+
 .med-behandlung p {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
   text-align: left; /* Ändere auf "left" statt "justify" */
@@ -43,7 +47,7 @@ font-weight: 400;
 
 .container {
   max-width: 100%;
-  padding: 0 0.5rem;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -421,39 +425,6 @@ form input, textarea {
 }
 
 
-
-/* ------------------------------------ */
-/* Medizinische Behandlung 2 */
-/* ------------------------------------ */
-
-/* #medbehandlung2{
-  padding-left: 50px;
-  padding-right: 85px;
-}
-
-.medbehandlung2_questions {
-  font-size: 40px;
-}
-
-.question {
-  font-size: 40px;
-}
-
-.answerMedbehandlung2 {
-  font-size: 40px;
-  border-radius: 10px;
-  padding: 10px 20px ;
-  background-color: rgba(39, 44, 202, 0.1);
-  border-color: #272DCA;
-  border-style: solid;
-}
-
-.answerMedbehandlung2:active {
-  background-color: #272DCA;
-  color: white;
-} */
-
-
 /* ------------------------------------ */
 /* Fertig ausgefüllt, Abschluss E-Mail und Abschluss Download */
 /* ------------------------------------ */
@@ -543,7 +514,6 @@ form input, textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 80vh;
   padding: 2rem 1rem;
   text-align: center;
   max-width: 700px;
@@ -573,15 +543,15 @@ form input, textarea {
 
 .zentriert-alles p {
   margin-top: 0;
-  margin-bottom: 18px;
-  font-size: 1.5rem;
+  margin-bottom: 40px;
+  font-size: 20px;
 }
 
 .btnaccount,
 .btnSubmit,
 .btnRegister {
   margin-top: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 /* Willkommensseite */
