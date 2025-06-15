@@ -162,7 +162,7 @@ footer {
   flex-direction: column; /* Buttons untereinander anordnen */
   align-items: center;    /* Buttons horizontal zentrieren */
   justify-content: center; /* Buttons vertikal zentrieren */
-  gap: 2rem;              /* Abstand zwischen den Buttons */
+  gap: 1rem;              /* Abstand zwischen den Buttons */
   cursor: pointer;
 }
 
@@ -171,7 +171,7 @@ footer {
   color: white;
   font-size: 20px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5px;
   text-align: center;     
   border: none;
   border-radius: 20px;  
@@ -469,12 +469,23 @@ main form {
   
 }
 
-
-#medbehandlung2 h2 .blue {
+#medbehandlung2 h2 {
   color: #272DCA;
   margin-left: 0.75rem;
 }
 
+.unterzeile {
+  display: block;
+  margin-left: 0.75rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #222;
+  margin-top: 0.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+  word-spacing: normal; /* oder z.B. 0.05em, falls du es noch enger willst */
+}
 
 
 /* ------------------------------------ */
