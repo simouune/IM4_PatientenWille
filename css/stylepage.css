@@ -425,6 +425,58 @@ form input, textarea {
 }
 
 
+
+/* ------------------------------------ */
+/* Medizinische Behandlung 1 */
+/* ------------------------------------ */
+
+form textarea {
+  margin-bottom: 1.6rem; /* Erhöht den Abstand zwischen den Feldern */
+}
+
+main form {
+  margin-top: 0.5rem; /* Weniger Abstand nach oben */
+  margin-left: 0.5rem; 
+}
+
+/* ------------------------------------ */
+/* Medizinische Behandlung 2 */
+/* ------------------------------------ */
+
+
+/* Fragenblock nach rechts einrücken und schöner gestalten */
+#form-container {
+  margin-top: 1rem; /* Weniger Abstand nach oben, Wert ggf. noch kleiner wählen */
+  margin-left: 0.65rem;      /* Abstand vom linken Rand */
+  max-width: 650px;         /* Optional: maximale Breite */
+}
+
+/* Jede Frage mit Abstand und linksbündigem Text */
+.question {
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  text-align: left;
+  padding: 0rem 0.55rem;
+  padding-left: 0.5rem;   /* rückt alles nach rechts */
+}
+
+/* Frage-Text (p) linksbündig und etwas größer */
+.question p {
+  margin: 0 0 0.7rem 0;
+  font-size: 1.2rem;
+  color: #222;
+  text-align: left;
+  
+}
+
+
+#medbehandlung2 h2 .blue {
+  color: #272DCA;
+  margin-left: 0.75rem;
+}
+
+
+
 /* ------------------------------------ */
 /* Fertig ausgefüllt, Abschluss E-Mail und Abschluss Download */
 /* ------------------------------------ */
